@@ -1,7 +1,5 @@
-from sqlalchemy import func
 from model import Park
-from flask import requests
-
+import requests
 from model import connect_to_db, db
 from server import app
 
@@ -11,12 +9,14 @@ from server import app
 def load_sf_parks():
     """Load full park list from sf opendata"""
 
+    Park.query.delete()
+
     r = requests.get("https://data.sfgov.org/resource/94uf-amnx.json")
     sf_info = r.json()
 
     for item in sf_info:
         #Leaves out park types that don't apply
-        if item['parktype'] != 'Community Garden' or 'Concession' or 'Zoological Garden':
+        if item['parktype'] != 'Community Garden' and item['parktype'] != 'Concession' and item['parktype'] != 'Zoological Garden':
             park_name = item.get('parkname')
             address = item.get('location_1_location')
             lat_long = item.get('location_1')
@@ -25,6 +25,9 @@ def load_sf_parks():
                 coordinates = lat_long.get('coordinates')
                 latitude = coordinates[1]
                 longitude = coordinates[0]
+            else:
+                latitude = None
+                longitude = None
 
             park = Park(park_name=park_name,
                         address=address,
