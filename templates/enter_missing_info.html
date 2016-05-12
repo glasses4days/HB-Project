@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Bark Park!!</h1>
+
+<form action='/enter_info' method="POST" id="missing_info">
+    Park id: <input type="number" name="park_id"></input><br>
+    On Leash: True<input type="radio" name="on_leash" value="True"></input>
+              False<input type="radio" name="on_leash" value="False"></input><br>
+    Off Leash Enclosed: True<input type="radio" name="off_leash_enclosed" value="True"></input>
+                          False<input type="radio" name="off_leash_enclosed" value="False"></input><br> 
+    Off Leash Unenclosed: True<input type="radio" name="off_leash_unenclosed" value="True"></input>
+                          False<input type="radio" name="off_leash_unenclosed" value="False"></input><br> 
+    Park url: <input type="text" name="park_url"></input><br>
+    <input type="submit"></input>
+</form>
+
+{% endblock %}
