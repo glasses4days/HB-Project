@@ -3,9 +3,14 @@
 <h1>Parks</h1>
 
 <ul>
+    <!-- Lists all the parks  -->
     {% for park in parks_all_data %}
-      <li>{{ park.park_name }}</li>
-    {% endfor %}
+    <li>
+        {{ park.park_name }}
+        <!-- If ther's a link, show it -->
+        {% if park.park_url %}<a href="{{ park.park_url }}">Link</a>{% endif %}
+    </li>
+        {% endfor %}
 </ul>
 
 {% endblock %}
