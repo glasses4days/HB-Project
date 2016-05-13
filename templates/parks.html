@@ -6,7 +6,7 @@
     <!-- Lists all the parks  -->
     {% for park in parks_all_data %}
     <li>
-        {{ park.park_name }}
+        {{ park.park_name | capitalize }}
         <!-- If ther's a link, show it -->
         {% if park.park_url %}<a href="{{ park.park_url }}">Link</a>{% endif %}
     </li>

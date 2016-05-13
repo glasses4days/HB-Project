@@ -32,7 +32,14 @@ def display_parks():
 
     return render_template("parks.html",
                             parks_all_data=parks_all_data,)
-                           
+
+@app.route('/filter_parks')
+def filter_parks():
+    """Filter parks from user input"""
+
+    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    #Fill in the rest of this:
+
 
 @app.route('/enter_info')
 def enter_park_info():
