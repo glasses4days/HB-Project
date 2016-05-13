@@ -118,7 +118,6 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 34	ALICE CHALMERS PLAYGROUND	670 Brunswick	37.7098271	-122.44665065	t	\N	\N	\N
 35	ALICE MARBLE TENNIS COURTS	Greenwich	37.80142776	-122.42034327	t	\N	\N	\N
 36	ALIOTO MINI PARK	20th	37.75890196	-122.41821702	t	\N	\N	\N
-37	ALLYNE PARK	2609 Gough St	37.79746066	-122.42759992	t	\N	\N	\N
 39	ANGELO J. ROSSI PLAYGROUND	2 Willard North St	37.77874186	-122.45745402	t	\N	\N	\N
 40	APTOS PLAYGROUND	Aptos	37.7285246	-122.46654085	t	\N	\N	\N
 41	ARGONNE PLAYGROUND	18th Ave	37.779415	-122.47769976	t	\N	\N	\N
@@ -167,6 +166,7 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 71	CORONA HEIGHTS	Roosevelt	37.76497671	-122.43879691	t	f	t	http://sfrecpark.org/destination/corona-heights-park/corona-heights-dog-play-area/
 83	EUREKA VALLEY REC CENTER	100 Collingwood St	37.75978957	-122.43648069	t	t	f	http://sfrecpark.org/destination/eureka-valley-rec-center/eureka-valley-dog-play-area/
 15	JOHN MCLAREN PARK	Mansell	37.7180842	-122.41907209	t	f	t	http://sfrecpark.org/destination/john-mclaren-park/mclaren-amphitheatre-dog-play-area/
+37	ALLYNE PARK	2609 Gough St	37.79746066	-122.42759992	t	t	f	http://www.sfparksalliance.org/our-parks/parks/allyne-park
 90	FRANKLIN SQUARE	16th	37.76501506	-122.4093148	t	\N	\N	\N
 91	FULTON PLAYGROUND	855 27th Ave	37.7733822	-122.48693405	t	\N	\N	\N
 92	GARFIELD SQUARE	26th	37.75020058	-122.4122356	t	\N	\N	\N
