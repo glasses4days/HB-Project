@@ -21,6 +21,24 @@ def index():
     return render_template("homepage.html")
 
 
+@app.route('/parks')
+def display_parks():
+    """Displays park data from db."""
+
+    #This will give me the data for all the park I want to work with
+    #Filters using on_leash as this is how I'm keeping bad data out
+    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all() 
+    #park_name = parks_all_data.park_name
+
+    # def print_park_names(park_data, park_filter):
+    #     for item in park_data:
+    #         print item.park_filter
+
+
+    return render_template("parks.html",
+                            parks_all_data=parks_all_data,)
+                            # park_names=park_names)
+
 @app.route('/enter_info')
 def enter_park_info():
     """Form to enter information missing from db"""

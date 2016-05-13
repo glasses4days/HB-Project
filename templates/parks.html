@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Parks</h1>
+
+<ul>
+    {% for park in parks_all_data %}
+      <li>{{ park.park_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

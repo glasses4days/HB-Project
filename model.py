@@ -25,7 +25,7 @@ class Park(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Parks park_id=%s park_name=%s address=%s latitude=%s longitude=%s on_leash=%s off_leash_enclosed=%s off_leash_unenclosed=%s park_url=%s>" % (self.park_id, self.park_name, self.park_city, self.address, self.latitude, self.longitude, self.on_leash,
+        return "<Parks park_id=%s park_name=%s address=%s latitude=%s longitude=%s on_leash=%s off_leash_enclosed=%s off_leash_unenclosed=%s park_url=%s>" % (self.park_id, self.park_name, self.address, self.latitude, self.longitude, self.on_leash,
             self.off_leash_enclosed, self.off_leash_unenclosed, self.park_url)
 
 
