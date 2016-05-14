@@ -2,15 +2,21 @@
 {% block content %}
 <h1>Parks</h1>
 
-<ul>
-    <!-- Lists all the parks  -->
-    {% for park in parks_all_data %}
-    <li>
-        {{ park.park_name | capitalize }}
-        <!-- If ther's a link, show it -->
-        {% if park.park_url %}<a href="{{ park.park_url }}">Link</a>{% endif %}
-    </li>
-        {% endfor %}
-</ul>
 
+    <!-- Lists all the parks  -->
+    <!-- {% for park in parks_all_data %} -->
+    
+        <!-- {% if off_leash_enclosed %} -->
+<ul>
+    {% for park in parks_off_leash_enclosed %}
+        <li>
+            hello
+<!--             {{ park.park_name | capitalize }}
+ -->        <!-- If ther's a link, show it -->
+            <!-- {% if park.park_url %}<a href="{{ park.park_url }}">Link</a>{% endif %} -->
+        </li>
+    {% endfor %}
+</ul>
+        <!-- {% endif %} -->
+    <!-- {% endfor %} -->
 {% endblock %}

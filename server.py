@@ -20,25 +20,51 @@ def index():
 
     return render_template("homepage.html")
 
+@app.route('/render_filter_parks')
+def render_filter_parks():
+    """Renders form for park filter"""
+
+    return render_template("park_filter.html")
+
 
 @app.route('/parks')
 def display_parks():
-    """Displays park data from db."""
+    """Displays park data from db using user input."""
 
     #This will give me the data for all the park I want to work with
     #Filters using on_leash as this is how I'm keeping bad data out
     #Able to access this in for loop through jinja so don't need to write one here
-    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all() 
+
+    on_leash = request.args.get("on_leash")
+    off_leash_unenclosed = request.args.get("off_leash_unenclosed")
+    off_leash_enclosed = request.args.get("off_leash_enclosed")
+    #This is parks all data because if on_leash is False, it is not a dog park
+    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
+    parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
+    
+    # raise Exception()
+
+    
+    #Do I need these here or can I do this in jinja??
+    # if on_leash:
+    #     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+
+    # if off_leash_unenclosed:
+    #     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
+
+    # if off_leash_enclosed:
+    #     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
     return render_template("parks.html",
-                            parks_all_data=parks_all_data,)
-
-@app.route('/filter_parks')
-def filter_parks():
-    """Filter parks from user input"""
-
-    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    #Fill in the rest of this:
+                            on_leash=on_leash,
+                            off_leash_unenclosed=off_leash_unenclosed,
+                            off_leash_enclosed=off_leash_enclosed,
+                            parks_all_data=parks_all_data,
+                            parks_on_leash=parks_on_leash,
+                            parks_off_leash_unenclosed=parks_off_leash_unenclosed,
+                            parks_off_leash_enclosed=parks_off_leash_enclosed)
 
 
 @app.route('/enter_info')

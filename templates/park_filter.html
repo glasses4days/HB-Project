@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Filter Parks</h1>
+
+<form action='/parks' method="GET" id="park_filter">
+    On Leash <input type="checkbox" name="on_leash" value="True"></input><br>
+    Enclosed <input type="checkbox" name="off_leash_enclosed" value="True"></input><br>                    
+    Off Leash Open <input type="checkbox" name="off_leash_unenclosed" value="True"></input><br>
+    <input type="submit" value="Find Parks!"></input>
+</form>
+
+{% endblock %}
