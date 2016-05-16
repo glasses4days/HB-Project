@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Lists all the parks  -->
+<!-- Lists filtered parks  -->
 {% if on_leash %}
 <h1>On Leash:</h1>
 <ul>
@@ -28,7 +28,8 @@
     {% endfor %}
 </ul>
         {% endif %}   
-    
+
+
 {% if off_leash_enclosed %}
 <h1>Fenced:</h1>
 <ul>

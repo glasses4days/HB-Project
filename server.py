@@ -18,7 +18,35 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
+
     return render_template("homepage.html")
+
+@app.route('/create_map_features')
+def create_map_features():
+    """Creating park features on map"""
+
+    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    geojson_objects = []
+
+    def create_geojson():
+        """Creates geojson objects"""
+
+        for park in parks_all_data:
+            print parks_all_data.park_name
+
+
+    render_template
+
+    # for park in parks_all_data:
+
+    # Markers = {}
+
+    # Markers['type'] = 'FeatureCollection'
+
+    # Markers['features'] = geojson_objects
+
+    # return jsonify(Markers)
+
 
 @app.route('/render_filter_parks')
 def render_filter_parks():
@@ -43,19 +71,6 @@ def display_parks():
     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
-    
-    # raise Exception()
-
-
-    #Do I need these here or can I do this in jinja??
-    # if on_leash:
-    #     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-
-    # if off_leash_unenclosed:
-    #     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
-
-    # if off_leash_enclosed:
-    #     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
     return render_template("parks.html",
                             on_leash=on_leash,
