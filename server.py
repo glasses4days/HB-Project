@@ -46,7 +46,7 @@ def display_parks():
     
     # raise Exception()
 
-    
+
     #Do I need these here or can I do this in jinja??
     # if on_leash:
     #     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
