@@ -1,10 +1,10 @@
 """ Bark Park server """
 
-from flask import Flask, render_template, redirect, request, flash, session
+from flask import Flask, render_template, redirect, request, flash, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
 from sqlalchemy import update
-
+import simplejson as json
 from model import connect_to_db, db, Park
 
 app = Flask(__name__)
@@ -30,44 +30,37 @@ def create_map_features():
     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
-
-    #Perhaps can write the function here?
-    # def create_geo_json():
-    
-
-    return render_template("homepage.html",
-                            parks_all_data=parks_all_data,
-                            parks_on_leash=parks_on_leash,
-                            parks_off_leash_enclosed=parks_off_leash_enclosed,
-                            parks_off_leash_unenclosed=parks_off_leash_unenclosed)
-
     geojson_objects = []
 
     for park in parks_all_data:
         park_name = park.park_name
         longitude = park.longitude
         latitude = park.latitude
-        #geojson_objects.append(park_name, longitude, latitude)
+        park_dict = {"type": "Feature",
+                     "geometry": {
+                     "type": "Point",
+                     "coordinates": [longitude, latitude]
+                     },
+                     "properties": {
+                     "title": park_name,
+                     "marker-symbol": "park"
+                     }
+                     }     
+        geojson_objects.append(park_dict)
 
-        park_dict = {    "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [ longitude , latitude ]
-                },
-                "properties": {
-                    "title": park_name,
-                    "marker-symbol": "park"
-                }
-            }
-        markers.append(park_dict)
+    markers = {}
+    markers['type'] = 'FeatureCollection'
+    markers['features'] = geojson_objects
+    markers_json = json.dumps(markers)
+    # raise Exception("stop here")
+    return render_template("homepage.html",
+                            parks_all_data=parks_all_data,
+                            parks_on_leash=parks_on_leash,
+                            parks_off_leash_enclosed=parks_off_leash_enclosed,
+                            parks_off_leash_unenclosed=parks_off_leash_unenclosed,
+                            markers=markers_json)
 
-    # Markers = {}
 
-    # Markers['type'] = 'FeatureCollection'
-
-    # Markers['features'] = geojson_objects
-
-    # return jsonify(Markers)
 
 
 @app.route('/render_filter_parks')

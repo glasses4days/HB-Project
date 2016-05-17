@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Bark Park!!</h1>
-
+<p id="markers" display="hidden">{{ markers }}</p>
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
@@ -11,26 +11,24 @@
             center: [-122.354083, 37.799648],
             zoom: 9
         });
-
-
-// Attempting to get the geo_json working for this........
-    {% for park in parks_all_data %}
+        var markers = $('#markers').html();
         map.on('load', function () {
+            console.log('Reached line 16')
         map.addSource("markers", {
         "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": [  
-            {    "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [{{ park.longitude }}, {{ park.latitude }}]
-                },
-                "properties": {
-                    "title": {{ park.park_name }},
-                    "marker-symbol": "park"
-                }
-            },
+        "data": 
+                
+                markers
+            // {    "type": "Feature",
+            //     "geometry": {
+            //         "type": "Point",
+            //         "coordinates": []
+            //     },
+            //     "properties": {
+            //         "title": ,
+            //         "marker-symbol": "park"
+            //     }
+            // },
             // {   "type": "Feature",
             //     "geometry": {
             //         "type": "Point",
@@ -41,9 +39,8 @@
             //         "marker-symbol": "park"
             //     }
             // }
-                ]
-            }
         });
+        console.log("reached line 42")
             map.addLayer({
                 "id": "markers",
                 "type": "symbol",
@@ -57,7 +54,8 @@
                 }
             });
         });
+        console.log("reached line 57")
 
-    {% endfor %}
+    
     </script>
 {% endblock %}
