@@ -26,16 +26,25 @@ def create_map_features():
     """Creating park features on map"""
 
     parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    geojson_objects = []
+    parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
+    parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
-    def create_geojson():
-        """Creates geojson objects"""
 
+    #Perhaps can write the function here?
+    def create_geo_json():
         for park in parks_all_data:
-            print parks_all_data.park_name
+            park_name = park.park_name
+            longitude = park.longitude
+            latitude = park.latitude
 
 
-    render_template
+    return render_template("homepage.html",
+                            parks_all_data=parks_all_data,
+                            parks_on_leash=parks_on_leash,
+                            parks_off_leash_enclosed=parks_off_leash_enclosed,
+                            parks_off_leash_unenclosed=parks_off_leash_unenclosed)
+
 
     # for park in parks_all_data:
 

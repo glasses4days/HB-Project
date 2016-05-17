@@ -5,36 +5,9 @@
 </head>
 <body>
     {% block content %} Content Goes Here {% endblock %}
-    <div id='map' style='width: 400px; height: 300px;'></div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
-            center: [-122.354083, 37.799648],
-            zoom: 9
-        });
-
-        // var sourceObj = new mapboxgl.GeoJSONSource({
-        //     data: {
-        //        "type": "FeatureCollection",
-        //        "features": [{
-        //           "id": "{37}",
-        //           "name": "Allyne Park",
-        //           "type": "Feature",
-        //           "properties": {
-        //             "on_leash": True,
-        //             "off_leash_enclosed": True,
-        //             "off_leash_unenclosed": False
-        //           },
-        //           "geometry": {
-        //             "coordinates": [-122.42759992, 37.79746066],
-        //             "type": "Point"
-        //           }
-        //         }]
-        //     }
-        // });
-        // map.addSource('markers', 
+   
+        
+       <!--  // map.addSource('markers', 
         //     {
         //        "type": "geojson",
         //         "data": {
@@ -59,52 +32,9 @@
 
         //         }]
         //         }
-        //     });
+        //     }); -->
 
-        map.on('load', function () {
-        map.addSource("markers", {
-        "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": [  
-            {    "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [-122.4994299, 37.7709859]
-                },
-                "properties": {
-                    "title": "Golden Gate Park Dog Training Area",
-                    "marker-symbol": "park"
-                }
-            },
-            {   "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [-122.42759992, 37.79746066]
-                },
-                "properties": {
-                    "title": "Allyne Park",
-                    "marker-symbol": "park"
-                }
-            }
-            ]
-        }
-    });
-
-    map.addLayer({
-        "id": "markers",
-        "type": "symbol",
-        "source": "markers",
-        "layout": {
-            "icon-image": "{marker-symbol}-15",
-            "text-field": "{title}",
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-offset": [0, 0.6],
-            "text-anchor": "top"
-        }
-    });
-});
-    </script>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script></body>
 </html>

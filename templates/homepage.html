@@ -2,5 +2,60 @@
 {% block content %}
 <h1>Bark Park!!</h1>
 
+ <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v9',
+            center: [-122.354083, 37.799648],
+            zoom: 9
+        });
 
+    {% for park in parks_all_data %}
+        map.on('load', function () {
+        map.addSource("markers", {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": [  
+            {    "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ park.longitude }}, {{ park.latitude }}]
+                },
+                "properties": {
+                    "title": {{ park.park_name }},
+                    "marker-symbol": "park"
+                }
+            },
+            // {   "type": "Feature",
+            //     "geometry": {
+            //         "type": "Point",
+            //         "coordinates": [-122.42759992, 37.79746066]
+            //     },
+            //     "properties": {
+            //         "title": "Allyne Park",
+            //         "marker-symbol": "park"
+            //     }
+            // }
+                ]
+            }
+        });
+            map.addLayer({
+                "id": "markers",
+                "type": "symbol",
+                "source": "markers",
+                "layout": {
+                    "icon-image": "{marker-symbol}-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                }
+            });
+        });
+
+    {% endfor %}
+    </script>
 {% endblock %}

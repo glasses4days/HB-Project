@@ -82,34 +82,6 @@ def load_oak_parks():
     db.session.commit()
 
 
-# Arkansas Friendship Garden
-# ESPRIT PARK
-# HOLLY PARK
-# Hooker Alley Community Garden
-# CRAGS COURT GARDEN
-# MT DAVIDSON PARK
-# TELEGRAPH HILL/PIONEER PARK
-# BAY VIEW PARK
-# BERNAL HEIGHTS PARK
-# MT OLYMPUS
-# Connecticut Friendship Garden
-# Dog Patch-Miller Memorial Comm. Garden
-# Garden for the Environment
-# GOLDEN GATE PARK - Section 1
-# GOLDEN GATE PARK - Section 2
-# GOLDEN GATE PARK - Section 3 (Arboretum)
-# GOLDEN GATE PARK - Section 4
-# GOLDEN GATE PARK - Section 5
-# GOLDEN GATE PARK - Section 6
-# LAKE MERCED PARK
-# O'SHAUGHNESSY HOLLOW
-# PARK PRESIDIO BLVD
-# RIDGETOP PLAZA
-# TOPAZ OPEN SPACE
-# TWIN PEAKS
-# WILLIE WOO WOO WONG PLAYGROUND
-# YACHT HARBOR AND MARINA GREEN
-
 if __name__ == "__main__":
     connect_to_db(app)
 
