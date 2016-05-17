@@ -32,12 +32,8 @@ def create_map_features():
 
 
     #Perhaps can write the function here?
-    def create_geo_json():
-        for park in parks_all_data:
-            park_name = park.park_name
-            longitude = park.longitude
-            latitude = park.latitude
-
+    # def create_geo_json():
+    
 
     return render_template("homepage.html",
                             parks_all_data=parks_all_data,
@@ -45,8 +41,25 @@ def create_map_features():
                             parks_off_leash_enclosed=parks_off_leash_enclosed,
                             parks_off_leash_unenclosed=parks_off_leash_unenclosed)
 
+    geojson_objects = []
 
-    # for park in parks_all_data:
+    for park in parks_all_data:
+        park_name = park.park_name
+        longitude = park.longitude
+        latitude = park.latitude
+        #geojson_objects.append(park_name, longitude, latitude)
+
+        park_dict = {    "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [ longitude , latitude ]
+                },
+                "properties": {
+                    "title": park_name,
+                    "marker-symbol": "park"
+                }
+            }
+        markers.append(park_dict)
 
     # Markers = {}
 
