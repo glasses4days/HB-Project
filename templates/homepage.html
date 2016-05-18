@@ -2,64 +2,73 @@
 {% block content %}
 <h1>Bark Park!!</h1>
 <p id="markers" display="hidden"></p>
+<nav id='menu-ui' class='menu-ui'>
+  <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
+  <a href='#' id='on_leash'>On Leash</a>
+  <a href='#' id='off_leash_enclosed'>Fenced</a>
+  <a href='#' id='off_leash_unenclosed'>Off Leash Open</a>
+</nav>
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
         L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
-        var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10);
+        var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10),
+        on_leash = document.getElementById('on_leash'),
+        off_leash_enclosed = document.getElementById('off_leash_enclosed'),
+        off_leash_unenclosed = document.getElementById('off_leash_unenclosed');
+
         $.get('/create_map_features', function (data) {
             console.log(data)
             var featureLayer = L.mapbox.featureLayer(data).addTo(map);})
-        // var featureLayer = L.mapbox.featureLayer().addTo(map);
-        // var map = new mapboxgl.Map({
-        //     container: 'map',
-        //     style: 'mapbox://styles/mapbox/light-v9',
-        //     center: [-122.354083, 37.799648],
-        //     zoom: 9
-        // });
+
+        on_leash.onclick = function(e) {
+            off_leash_enclosed.className = '';
+            off_leash_unenclosed.className = '';
+            this.className = 'active';
+            // The setFilter function takes a GeoJSON feature object
+            // and returns true to show it or false to hide it.
+            map.featureLayer.setFilter(function(f) {
+                return f.properties['on_leash'] === true;
+            });
+            return false;
+        };
+
+        off_leash_enclosed.onclick = function(e) {
+            off_leash_unenclosed.className = '';
+            on_leash.className = '';
+            this.className = 'active';
+            // The setFilter function takes a GeoJSON feature object
+            // and returns true to show it or false to hide it.
+            map.featureLayer.setFilter(function(f) {
+                return f.properties['off_leash_fenced'] === true;
+            });
+            return false;
+        };
+
+        off_leash_unenclosed.onclick = function(e) {
+            off_leash_enclosed.className = '';
+            on_leash.className = '';
+            this.className = 'active';
+            // The setFilter function takes a GeoJSON feature object
+            // and returns true to show it or false to hide it.
+            map.featureLayer.setFilter(function(f) {
+                return f.properties['off_leash_open'] === true;
+            });
+            return false;
+        };
+
+        // all.onclick = function() {
+        //     food.className = '';
+        //     this.className = 'active';
+        //     map.featureLayer.setFilter(function(f) {
+        //         // Returning true for all markers shows everything.
+        //         return true;
+        //     });
+        //     return false;
+        // };
         
-        // map.on('load', function () {
-        //     console.log('Reached line 16')
-        // map.addSource("markers", {
-        // "type": "geojson",
-        // "data": 
-        //        
-            // {    "type": "Feature",
-            //     "geometry": {
-            //         "type": "Point",
-            //         "coordinates": []
-            //     },
-            //     "properties": {
-            //         "title": ,
-            //         "marker-symbol": "park"
-            //     }
-            // },
-            // {   "type": "Feature",
-            //     "geometry": {
-            //         "type": "Point",
-            //         "coordinates": [-122.42759992, 37.79746066]
-            //     },
-            //     "properties": {
-            //         "title": "Allyne Park",
-            //         "marker-symbol": "park"
-            //     }
-            // }
-        // });
-        // console.log("reached line 42")
-        //     map.
-        //     // map.addLayer({
-        //     //     "id": "markers",
-        //     //     "type": "symbol",
-        //     //     "source": "markers",
-        //     //     "layout": {
-        //     //         "icon-image": "{marker-symbol}-15",
-        //     //         "text-field": "{title}",
-        //     //         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-        //     //         "text-offset": [0, 0.6],
-        //     //         "text-anchor": "top"
-        //     //     }
-        //     // });
-        // });
-        // console.log("reached line 57")
+
+        
+    
 
     
     </script>

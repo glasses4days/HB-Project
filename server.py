@@ -28,14 +28,26 @@ def create_map_features():
 
 
     parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
-    parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
+    # parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    # parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
+    # parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
     geojson_objects = []
 
     for park in parks_all_data:
         park_name = park.park_name
+        if on_leash:
+            on_leash = True
+        else:
+            on = False
+        if off_leash_unenclosed:
+            off_un = True
+        else:
+            off_un = False
+        if off_leash_enclosed:
+            off_en = True
+        else:
+            off_en = False
         longitude = park.longitude
         latitude = park.latitude
         park_dict = {"type": "Feature",
@@ -45,16 +57,18 @@ def create_map_features():
                      },
                      "properties": {
                      "title": park_name,
-                     "marker-symbol": "park"
+                     "marker-symbol": "park",
+                     "on_leash": on_leash,
+                     "off_leash_open": off_un,
+                     "off_leash_fenced": off_en
                      }
-                     }     
+                     } 
         geojson_objects.append(park_dict)
     # import pdb; pdb.set_trace()
     markers = {}
     markers["type"] = "FeatureCollection"
     markers["features"] = geojson_objects
-    # markers_json = json.dumps(geojson_objects)
-    # raise Exception("stop here")
+
     return jsonify(markers)
     # render_template("homepage.html",
     #                         parks_all_data=parks_all_data,
@@ -62,11 +76,6 @@ def create_map_features():
     #                         parks_off_leash_enclosed=parks_off_leash_enclosed,
     #                         parks_off_leash_unenclosed=parks_off_leash_unenclosed,
     #                         markers=markers_json)
-
-
-@app.route('/markers.json')
-def create_markers():
-    """markers"""
 
 
 @app.route('/render_filter_parks')
