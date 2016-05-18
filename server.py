@@ -21,12 +21,13 @@ def index():
 
     return render_template("homepage.html")
 
+
 @app.route('/create_map_features')
 def create_map_features():
     """Creating park features on map"""
 
-    parks_all_data = Park.query.filter(Park.park_id==191)
-    # parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+
+    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
