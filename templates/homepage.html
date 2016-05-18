@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Bark Park!!</h1>
-<p id="markers" display="hidden">{{ markers }}</p>
+<p id="markers" display="hidden"></p>
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
-            center: [-122.354083, 37.799648],
-            zoom: 9
-        });
-        var markers = $('#markers').html();
-        map.on('load', function () {
-            console.log('Reached line 16')
-        map.addSource("markers", {
-        "type": "geojson",
-        "data": 
-                
-                markers
+        L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
+        var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10);
+        $.get('/create_map_features', function (data) {
+            console.log(data)
+            var featureLayer = L.mapbox.featureLayer(data).addTo(map);})
+        // var featureLayer = L.mapbox.featureLayer().addTo(map);
+        // var map = new mapboxgl.Map({
+        //     container: 'map',
+        //     style: 'mapbox://styles/mapbox/light-v9',
+        //     center: [-122.354083, 37.799648],
+        //     zoom: 9
+        // });
+        
+        // map.on('load', function () {
+        //     console.log('Reached line 16')
+        // map.addSource("markers", {
+        // "type": "geojson",
+        // "data": 
+        //        
             // {    "type": "Feature",
             //     "geometry": {
             //         "type": "Point",
@@ -39,22 +43,23 @@
             //         "marker-symbol": "park"
             //     }
             // }
-        });
-        console.log("reached line 42")
-            map.addLayer({
-                "id": "markers",
-                "type": "symbol",
-                "source": "markers",
-                "layout": {
-                    "icon-image": "{marker-symbol}-15",
-                    "text-field": "{title}",
-                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                    "text-offset": [0, 0.6],
-                    "text-anchor": "top"
-                }
-            });
-        });
-        console.log("reached line 57")
+        // });
+        // console.log("reached line 42")
+        //     map.
+        //     // map.addLayer({
+        //     //     "id": "markers",
+        //     //     "type": "symbol",
+        //     //     "source": "markers",
+        //     //     "layout": {
+        //     //         "icon-image": "{marker-symbol}-15",
+        //     //         "text-field": "{title}",
+        //     //         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        //     //         "text-offset": [0, 0.6],
+        //     //         "text-anchor": "top"
+        //     //     }
+        //     // });
+        // });
+        // console.log("reached line 57")
 
     
     </script>

@@ -25,7 +25,8 @@ def index():
 def create_map_features():
     """Creating park features on map"""
 
-    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
+    parks_all_data = Park.query.filter(Park.park_id==191)
+    # parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
     parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
     parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
     parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
@@ -47,20 +48,24 @@ def create_map_features():
                      }
                      }     
         geojson_objects.append(park_dict)
-
+    # import pdb; pdb.set_trace()
     markers = {}
-    markers['type'] = 'FeatureCollection'
-    markers['features'] = geojson_objects
-    markers_json = json.dumps(markers)
+    markers["type"] = "FeatureCollection"
+    markers["features"] = geojson_objects
+    # markers_json = json.dumps(geojson_objects)
     # raise Exception("stop here")
-    return render_template("homepage.html",
-                            parks_all_data=parks_all_data,
-                            parks_on_leash=parks_on_leash,
-                            parks_off_leash_enclosed=parks_off_leash_enclosed,
-                            parks_off_leash_unenclosed=parks_off_leash_unenclosed,
-                            markers=markers_json)
+    return jsonify(markers)
+    # render_template("homepage.html",
+    #                         parks_all_data=parks_all_data,
+    #                         parks_on_leash=parks_on_leash,
+    #                         parks_off_leash_enclosed=parks_off_leash_enclosed,
+    #                         parks_off_leash_unenclosed=parks_off_leash_unenclosed,
+    #                         markers=markers_json)
 
 
+@app.route('/markers.json')
+def create_markers():
+    """markers"""
 
 
 @app.route('/render_filter_parks')
