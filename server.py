@@ -36,15 +36,15 @@ def create_map_features():
 
     for park in parks_all_data:
         park_name = park.park_name
-        if on_leash:
+        if park.on_leash:
             on_leash = True
         else:
             on = False
-        if off_leash_unenclosed:
+        if park.off_leash_unenclosed:
             off_un = True
         else:
             off_un = False
-        if off_leash_enclosed:
+        if park.off_leash_enclosed:
             off_en = True
         else:
             off_en = False

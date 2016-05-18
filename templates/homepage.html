@@ -11,11 +11,12 @@
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
         L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
-        var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10),
+        var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10);
         on_leash = document.getElementById('on_leash'),
         off_leash_enclosed = document.getElementById('off_leash_enclosed'),
         off_leash_unenclosed = document.getElementById('off_leash_unenclosed');
 
+        // Figure out how to get this into an event listener/connect the map layer
         $.get('/create_map_features', function (data) {
             console.log(data)
             var featureLayer = L.mapbox.featureLayer(data).addTo(map);})
