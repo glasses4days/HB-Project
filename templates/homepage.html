@@ -2,11 +2,11 @@
 {% block content %}
 <h1>Bark Park!!</h1>
 <p id="markers" display="hidden"></p>
-<nav id='menu-ui' class='menu-ui'>
+<nav class='menu-ui'>
   <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
-  <a href='#' data-filter='on_leash'>On Leash</a>
-  <a href='#' data-filter='off_leash_enclosed'>Fenced</a>
-  <a href='#' data-filter='off_leash_unenclosed'>Off Leash Open</a>
+  <a href='#' data-filter='on_leash' id='on_l'>On Leash</a>
+  <a href='#' data-filter='off_leash_fenced'>Fenced</a>
+  <a href='#' data-filter='off_leash_open'>Off Leash Open</a>
 </nav>
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
@@ -17,16 +17,30 @@
         // off_leash_unenclosed = document.getElementById('off_leash_unenclosed');
 
         // Figure out how to get this into an event listener/connect the map layer
-        var  geojson = $.get('/create_map_features', function (data) { return data });
-            // console.log(data)
+        var geojson = $.get('/create_map_features', function (data) { 
+            console.log(data)
+
+            return JSON.parse(data.responseText).features});
+            // data = JSON.parse(data.responseText).features
             // var featureLayer = L.mapbox.featureLayer(data).addTo(map)}); 
+            // return data.responseText });
+            // var markers = L.mapbox.featureLayer().setGeoJSON(data).addTo(map);
 
-        var markers = L.mapbox.featureLayer()
-            .setGeoJSON(geojson)
-            .addTo(map);
+         // });
+        // This works when I assign it in the console, but returns undefined for some reason 
+        // from the code
+        var parsedGeoJson = JSON.parse(geojson.responseText).features;
+        var markers = L.mapbox.featureLayer(parsedGeoJson).addTo(map);
+        // var markers = featureLayer;
+        // var markers = L.mapbox.featureLayer(parsed).addTo(map);
+         // var markers = L.mapbox.featureLayer()
+         //    .setGeoJSON(JSON.parse(geojson.responseText).features)
+         //    .addTo(map);
 
+      
         $('.menu-ui a').on('click', function() {
             // For each filter link, get the 'data-filter' attribute value.
+            console.log('I clicked this!')
             var filter = $(this).data('filter');
             $(this).addClass('active').siblings().removeClass('active');
             markers.setFilter(function(f) {
@@ -106,3 +120,4 @@
     
     </script>
 {% endblock %}
+
