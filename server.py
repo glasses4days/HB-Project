@@ -68,6 +68,7 @@ def create_map_features():
     markers = {}
     markers["type"] = "FeatureCollection"
     markers["features"] = geojson_objects
+    print jsonify(markers)
 
     return jsonify(markers)
     # render_template("homepage.html",
@@ -124,6 +125,8 @@ def update_info_in_db():
     """Updates db from info entered into form."""
 
     park_id = request.form.get("park_id")
+    latitude = request.form.get("latitude")
+    longitude = request.form.get("longitude")
     on_leash = request.form.get("on_leash")
     off_leash_enclosed = request.form.get("off_leash_enclosed")
     off_leash_unenclosed= request.form.get("off_leash_unenclosed")
@@ -131,11 +134,11 @@ def update_info_in_db():
 
     update_park = """
         UPDATE parks
-        SET on_leash = :on_leash, off_leash_enclosed = :off_leash_enclosed, off_leash_unenclosed = :off_leash_unenclosed, park_url = :park_url
+        SET latitude = :latitude, longitude = :longitude, on_leash = :on_leash, off_leash_enclosed = :off_leash_enclosed, off_leash_unenclosed = :off_leash_unenclosed, park_url = :park_url
         WHERE park_id = :park_id
         """
 
-    db.session.execute(update_park, {'park_id': park_id, 'on_leash': on_leash, 'off_leash_enclosed': off_leash_enclosed, 'off_leash_unenclosed': off_leash_unenclosed, 'park_url': park_url})
+    db.session.execute(update_park, {'latitude': latitude, 'longitude':longitude, 'on_leash': on_leash, 'off_leash_enclosed': off_leash_enclosed, 'off_leash_unenclosed': off_leash_unenclosed, 'park_url': park_url})
     db.session.commit()
 
     # print park_id, on_leash, off_leash_enclosed, off_leash_unenclosed, park_url
