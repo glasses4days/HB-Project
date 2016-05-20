@@ -4,72 +4,89 @@
 <p id="markers" display="hidden"></p>
 <nav id='menu-ui' class='menu-ui'>
   <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
-  <a href='#' id='on_leash'>On Leash</a>
-  <a href='#' id='off_leash_enclosed'>Fenced</a>
-  <a href='#' id='off_leash_unenclosed'>Off Leash Open</a>
+  <a href='#' data-filter='on_leash'>On Leash</a>
+  <a href='#' data-filter='off_leash_enclosed'>Fenced</a>
+  <a href='#' data-filter='off_leash_unenclosed'>Off Leash Open</a>
 </nav>
  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
         L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
         var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 10);
-        on_leash = document.getElementById('on_leash'),
-        off_leash_enclosed = document.getElementById('off_leash_enclosed'),
-        off_leash_unenclosed = document.getElementById('off_leash_unenclosed');
+        // on_leash = document.getElementById('on_leash'),
+        // off_leash_enclosed = document.getElementById('off_leash_enclosed'),
+        // off_leash_unenclosed = document.getElementById('off_leash_unenclosed');
 
         // Figure out how to get this into an event listener/connect the map layer
-        $.get('/create_map_features', function (data) {
-            console.log(data)
-            var featureLayer = L.mapbox.featureLayer(data).addTo(map);})
+        var  geojson = $.get('/create_map_features', function (data) { return data });
+            // console.log(data)
+            // var featureLayer = L.mapbox.featureLayer(data).addTo(map)}); 
 
-        $(document).ready(
-            on_leash.onclick = function(e) {
-                off_leash_enclosed.className = '';
-                off_leash_unenclosed.className = '';
-                this.className = 'active';
-                console.log(this);
-                console.log(e)
-                // The setFilter function takes a GeoJSON feature object
-                // and returns true to show it or false to hide it.
-                map.featureLayer.setFilter(function(f) {
-                    return f.properties['on_leash'] === true;
-                });
-                return false;
-            });
+        var markers = L.mapbox.featureLayer()
+            .setGeoJSON(geojson)
+            .addTo(map);
 
-        $(document).ready(
-            off_leash_enclosed.onclick = function(e) {
-                off_leash_unenclosed.className = '';
-                on_leash.className = '';
-                this.className = 'active';
-                console.log(this);
-                console.log(e);
-                console.log(f);
-                // The setFilter function takes a GeoJSON feature object
-                // and returns true to show it or false to hide it.
-                map.featureLayer.setFilter(function(f) {
-                    console.log("Do I work?")
-                    return f.properties['off_leash_fenced'] === true;
-                });
-                console.log(map.featureLayer.setFilter);
-                return false;
+        $('.menu-ui a').on('click', function() {
+            // For each filter link, get the 'data-filter' attribute value.
+            var filter = $(this).data('filter');
+            $(this).addClass('active').siblings().removeClass('active');
+            markers.setFilter(function(f) {
+                // If the data-filter attribute is set to "all", return
+                // all (true). Otherwise, filter on markers that have
+                // a value set to true based on the filter name.
+                return (filter === 'all') ? true : f.properties[filter] === true;
             });
+            return false;
+        });
 
-        $(document).ready(
-            off_leash_unenclosed.onclick = function(e) {
-                off_leash_enclosed.className = '';
-                on_leash.className = '';
-                this.className = 'active';
-                console.log(this);
-                console.log(e)
-                // The setFilter function takes a GeoJSON feature object
-                // and returns true to show it or false to hide it.
-                map.featureLayer.setFilter(function(f) {
-                    console.log("In off_leash_unenclosed featureLayer")
-                    console.log(f)
-                    return f.properties['off_leash_open'] === true;
-                });
-                return false;
-            });
+        // $(document).ready(
+        //     on_leash.onclick = function(e) {
+        //         off_leash_enclosed.className = '';
+        //         off_leash_unenclosed.className = '';
+        //         this.className = 'active';
+        //         console.log(this);
+        //         console.log(e)
+        //         // The setFilter function takes a GeoJSON feature object
+        //         // and returns true to show it or false to hide it.
+        //         map.featureLayer.setFilter(function(f) {
+        //             return f.properties['on_leash'] === true;
+        //         });
+        //         return false;
+        //     });
+
+        // $(document).ready(
+        //     off_leash_enclosed.onclick = function(e) {
+        //         off_leash_unenclosed.className = '';
+        //         on_leash.className = '';
+        //         this.className = 'active';
+        //         console.log(this);
+        //         console.log(e);
+        //         console.log(f);
+        //         // The setFilter function takes a GeoJSON feature object
+        //         // and returns true to show it or false to hide it.
+        //         map.featureLayer.setFilter(function(f) {
+        //             console.log("Do I work?")
+        //             return f.properties['off_leash_fenced'] === true;
+        //         });
+        //         console.log(map.featureLayer.setFilter);
+        //         return false;
+        //     });
+
+        // $(document).ready(
+        //     off_leash_unenclosed.onclick = function(e) {
+        //         off_leash_enclosed.className = '';
+        //         on_leash.className = '';
+        //         this.className = 'active';
+        //         console.log(this);
+        //         console.log(e)
+        //         // The setFilter function takes a GeoJSON feature object
+        //         // and returns true to show it or false to hide it.
+        //         map.featureLayer.setFilter(function(f) {
+        //             console.log("In off_leash_unenclosed featureLayer")
+        //             console.log(f)
+        //             return f.properties['off_leash_open'] === true;
+        //         });
+        //         return false;
+        //     });
         
 
         // all.onclick = function() {
