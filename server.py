@@ -6,6 +6,7 @@ from jinja2 import StrictUndefined
 from sqlalchemy import update
 import simplejson as json
 from model import connect_to_db, db, Park
+from creategeojson import create_geojson
 
 app = Flask(__name__)
 
@@ -30,43 +31,20 @@ def create_map_features():
     #This will give me the data for all the park I want to work with
     #Filters using on_leash as this is how I'm keeping bad data out
     parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-
     geojson_objects = []
 
-    # Can this be simplified?
+    #This for loop builds the dictionary that will be the base for the geojson
+    #for map markers.
     for park in parks_all_data:
-        park_name = park.park_name
-        if park.on_leash:
-            on_leash = True
-        else:
-            on = False
-        if park.off_leash_unenclosed:
-            off_un = True
-        else:
-            off_un = False
-        if park.off_leash_enclosed:
-            off_en = True
-        else:
-            off_en = False
-        longitude = park.longitude
-        latitude = park.latitude
-        park_dict = {"type": "Feature",
-                     "geometry": {
-                     "type": "Point",
-                     "coordinates": [longitude, latitude]
-                     },
-                     "properties": {
-                     "title": park_name,
-                     "marker-symbol": "park",
-                     "on_leash": on_leash,
-                     "off_leash_open": off_un,
-                     "off_leash_fenced": off_en
-                     }
-                     }
+        #calls helper function create_geojson() for each park
+        park_dict = create_geojson(park)
+        #Appends each dictionary to the geo_json objects list
         geojson_objects.append(park_dict)
-
+    #Intializes empty dictionary marker
     markers = {}
+    #Creates key: value pair for type: feature collection
     markers["type"] = "FeatureCollection"
+    #creates key value pair for feature: entire geojson_objects
     markers["features"] = geojson_objects
 
     return jsonify(markers)
