@@ -27,10 +27,9 @@ def create_map_features():
     """Creating park features on map"""
 
 
+    #This will give me the data for all the park I want to work with
+    #Filters using on_leash as this is how I'm keeping bad data out
     parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    # parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    # parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
-    # parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()
 
     geojson_objects = []
 
@@ -63,53 +62,14 @@ def create_map_features():
                      "off_leash_open": off_un,
                      "off_leash_fenced": off_en
                      }
-                     } 
+                     }
         geojson_objects.append(park_dict)
-    # import pdb; pdb.set_trace()
+
     markers = {}
     markers["type"] = "FeatureCollection"
     markers["features"] = geojson_objects
-    print jsonify(markers)
 
     return jsonify(markers)
-    # render_template("homepage.html",
-    #                         parks_all_data=parks_all_data,
-    #                         parks_on_leash=parks_on_leash,
-    #                         parks_off_leash_enclosed=parks_off_leash_enclosed,
-    #                         parks_off_leash_unenclosed=parks_off_leash_unenclosed,
-    #                         markers=markers_json)
-
-
-@app.route('/render_filter_parks')
-def render_filter_parks():
-    """Renders form for park filter"""
-
-    return render_template("park_filter.html")
-
-
-@app.route('/parks.json')
-def display_parks():
-    """Displays park data from db using user input."""
-
-    #This will give me the data for all the park I want to work with
-    #Filters using on_leash as this is how I'm keeping bad data out
-    #Able to access this in for loop through jinja so don't need to write one here
-
-    on_leash = request.args.get("on_leash")
-    off_leash_unenclosed = request.args.get("off_leash_unenclosed")
-    off_leash_enclosed = request.args.get("off_leash_enclosed")
-    #This is parks all data because if on_leash is False, it is not a dog park
-    parks_all_data = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    parks_on_leash = Park.query.filter(Park.on_leash==True).order_by(Park.park_name).all()
-    parks_off_leash_unenclosed = Park.query.filter(Park.off_leash_unenclosed==True).order_by(Park.park_name).all()
-    parks_off_leash_enclosed = Park.query.filter(Park.off_leash_enclosed==True).order_by(Park.park_name).all()   
-    return jsonify(on_leash=on_leash,
-                    off_leash_unenclosed=off_leash_unenclosed,
-                    off_leash_enclosed=off_leash_enclosed,
-                    parks_all_data=parks_all_data,
-                    parks_on_leash=parks_on_leash,
-                    parks_off_leash_unenclosed=parks_off_leash_unenclosed,
-                    parks_off_leash_enclosed=parks_off_leash_enclosed)
 
 
 @app.route('/enter_info')
@@ -126,6 +86,8 @@ def update_info_in_db():
     park_id = request.form.get("park_id")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
+    # Commented out code below depending on what info I need to add to db.
+
     # on_leash = request.form.get("on_leash")
     # off_leash_enclosed = request.form.get("off_leash_enclosed")
     # off_leash_unenclosed= request.form.get("off_leash_unenclosed")
@@ -143,26 +105,10 @@ def update_info_in_db():
         SET latitude = :latitude, longitude = :longitude
         WHERE park_id = :park_id
         """
-    db.session.execute(update_park, {'park_id': park_id, 'latitude': latitude, 'longitude':longitude})
+    db.session.execute(update_park, {'park_id': park_id, 'latitude': latitude, 'longitude': longitude})
+    #This is for adding park type filter and url.
     # db.session.execute(update_park, {'latitude': latitude, 'longitude':longitude, 'on_leash': on_leash, 'off_leash_enclosed': off_leash_enclosed, 'off_leash_unenclosed': off_leash_unenclosed, 'park_url': park_url})
     db.session.commit()
-
-    # print park_id, on_leash, off_leash_enclosed, off_leash_unenclosed, park_url
-
-    #assigning park object to park
-    #park = Park.query.get(park_id)
-    # decided to go with the one above instead of: park = Park.query.filter(Park.park_id==park_id).one()
-
-
-    #This would be super repetitive, but I think it might work. For later, checking if value exists.
-    # if park.on_leash == None:
-    #     park.on_leash = on_leash
-    # if park.off_leash_enclosed == None:
-    #     park.off_leash_enclosed = off_leash_enclosed
-    # if park.off_leash_unenclosed == None:
-    #     park.off_leash_unenclosed = off_leash_unenclosed
-    # if park_url == None:
-    #     park.url = park.url
 
     return redirect('/enter_info')
 
