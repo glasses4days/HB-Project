@@ -70,11 +70,11 @@ def example_data():
 ##############################################################################
 #Helper functions
 
-def connect_to_db(app):
+def connect_to_db(app, db_uri="postgresql:///barkParkdb"):
     """Connect the database to Flask app."""
 
     # Configure to use PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///barkParkdb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     db.app = app
     db.init_app(app)
 
