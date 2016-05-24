@@ -28,6 +28,44 @@ class Park(db.Model):
         return "<Parks park_id=%s park_name=%s address=%s latitude=%s longitude=%s on_leash=%s off_leash_enclosed=%s off_leash_unenclosed=%s park_url=%s>" % (self.park_id, self.park_name, self.address, self.latitude, self.longitude, self.on_leash,
             self.off_leash_enclosed, self.off_leash_unenclosed, self.park_url)
 
+##############################################################################
+#Creates test database
+
+def example_data():
+    """Create some sample data."""
+
+    park_one = Park(park_id = 1, 
+                    park_name = 'INDIA BASIN SHORELINE PARK',
+                    address = 'Evans',
+                    latitude = 37.73366342,
+                    longitude = -122.37371901,
+                    on_leash = True, 
+                    off_leash_enclosed = False,
+                    off_leash_unenclosed = False,
+                    park_url = None)
+
+    park_two = Park(park_id = 2, 
+                    park_name = 'JAPANTOWN PEACE PLAZA',
+                    address = 'Post',
+                    latitude = 37.78520911,
+                    longitude = -122.42975098,
+                    on_leash = True, 
+                    off_leash_enclosed = False,
+                    off_leash_unenclosed = False,
+                    park_url = None)
+
+    park_three = Park(park_id = 3, 
+                    park_name = 'JOSEPH CONRAD MINI PARK',
+                    address = '601 Beach St',
+                    latitude = 37.80667244,
+                    longitude = -122.41906274,
+                    on_leash = True, 
+                    off_leash_enclosed = True,
+                    off_leash_unenclosed = False,
+                    park_url = 'http://sfrecpark.org/destination/joseph-conrad-mini-park/')
+
+    db.session.add_all([park_one, park_two, park_three])
+    db.session.commit()
 
 ##############################################################################
 #Helper functions
