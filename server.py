@@ -34,6 +34,7 @@ def create_map_features():
 
     geojson_objects = []
 
+    # Can this be simplified?
     for park in parks_all_data:
         park_name = park.park_name
         if park.on_leash:
