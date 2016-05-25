@@ -267,12 +267,12 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 237	Joaquin Miller Dog Play Area	3590 Sanborn Drive	37.810859987420464	-122.19269090980518	f	f	f	
 232	Lakeside Park	666 Bellevue Avenue	37.80795499033483	-122.25885972773281	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 239	Oak Glen Park	3390 Richmond Blvd	37.82030385518474	-122.25837603447687	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
-218	Snow Park	19th Street &amp; Harrison Street	37.80505999961946	-122.27301999967312	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 256	Estuary Channel Park	5 Embarcadero	37.79098860532374	-122.26432675894569	t	f	t	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 195	UPPER NOE RECREATION CENTER	Day	37.74243091	-122.42779751	t	t	f	http://sfrecpark.org/destination/upper-noe-rec-center/upper-noe-dog-play-area/
 191	TOPAZ OPEN SPACE	\N	37.7417041	-122.4361625	t	\N	\N	\N
 207	YACHT HARBOR AND MARINA GREEN	\N	37.8065	-122.4424	t	\N	\N	\N
 193	TWIN PEAKS	\N	37.7512923	-122.4477896	t	\N	\N	\N
+218	Snow Park	19th Street &amp; Harrison Street	37.806847	-122.264325	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 259	25th Street Mini Park	25th Street	37.7957554971087	-122.23564084734986	\N	f	\N	\N
 261	Montclair Park	6300 Moraga Avenue	37.828526809031004	-122.21243443299211	\N	f	\N	\N
 262	Lincoln Square Park	261 11th Street	37.80043463426119	-122.26800787429386	\N	f	\N	\N
@@ -331,14 +331,13 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 323	Saint Andrews Plaza	32nd Street &amp; San Pablo Ave	37.80505999961946	-122.27301999967312	\N	f	\N	\N
 324	Willow Mini Park	1368 Willow St	37.812437920752245	-122.29665984703786	\N	f	\N	\N
 326	Kennedy Tract Park	26th Avenue &amp; East 9th Street	37.80505999961946	-122.27301999967312	\N	f	\N	\N
-274	Eastshore Park	550 El Embarcadero &amp; Lakeshore Ave	37.80505999961946	-122.27301999967312	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 260	Hardy Dog Play Area	491 Hardy Street	37.84202012861456	-122.25718721053968	t	t	f	http://www2.oaklandnet.com/government/o/opr/s/Parks/Hardy/index.htm
-263	Grove Shafter Dog Play Area	Martin Luther King Jr Way &amp; 36th Street	37.80505999961946	-122.27301999967312	t	t	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
+274	Eastshore Park	550 El Embarcadero &amp; Lakeshore Ave	37.809182	-122.248919	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 270	Knowland Park	9777 Golf Links Rd	37.753335947280924	-122.15032626989203	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 327	Mosswood Park	3612 Webster Street	37.82388635030956	-122.26190991013061	t	t	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 325	Montclair Railroad Trail	6000 Shepherd Canyon Rd	37.831494	122.197018	t	f	f	http://www.montclairrrtrail.org/trail-location-map.html
 287	Mosswood Dog Play Area	3612 Webster Street	37.82388635030956	-122.26190991013061	f	f	f	
-328	Rockridge-Temescal Greenbelt (FROG Park)	Along Temescal Creek, Hudson St to Redondo Park	37.80505999961946	-122.27301999967312	t	f	f	http://www.frogpark.org/location/
+263	Grove Shafter Dog Play Area	Martin Luther King Jr Way &amp; 36th Street	37.825090	-122.269604	t	t	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 291	King Estates	8501 Fontaine St	37.76462581458471	-122.15256817383897	t	f	t	http://www.oknia.org/KEOS.html
 331	Burckhalter Park	2535 High Street	37.78179169684871	-122.20494279765407	\N	f	\N	\N
 332	Helen McGregor Plaza Park	Martin Luther King Jr Way &amp; 5210 West Street	37.80505999961946	-122.27301999967312	\N	f	\N	\N
@@ -349,7 +348,6 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 337	Verdese Carter Park	9600 Sunnyside Street	37.748541090570484	-122.16335334263471	\N	f	\N	\N
 338	Frank Ogawa Firescape Garden	6900 Broadway	37.850484201010566	-122.22239492823022	\N	f	\N	\N
 339	Firestorm Memorial Garden	Tunnel Road/Hiller Drive	37.855601091569376	-122.2278336497169	\N	f	\N	\N
-340	Channel Park	1 10th Street &amp; 21 7th Street	37.80505999961946	-122.27301999967312	\N	f	\N	\N
 341	Cesar Chavez Park	Foothill Boulevard	37.775655649753844	-122.21291497966945	\N	f	\N	\N
 246	Dimond Park	3860 Hanly Road	37.807082984075336	-122.21441669084938	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 231	Hardy Park & Dog Park	491 Hardy Street	37.84202012861456	-122.25718721053968	f	f	f	
@@ -357,8 +355,6 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 178	SIGMUND STERN RECREATION GROVE	19th Ave	37.7369668	-122.4785155	t	f	t	http://sfrecpark.org/destination/sigmund-stern-recreation-grove/stern-grove-dog-play-areas/
 238	Jefferson Dog Play Area	618 Jefferson Street	37.800331412598446	-122.27804291489684	t	t	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 329	Joaquin Miller Park	3590 Sanborn Drive	37.810859987420464	-122.19269090980518	t	t	f	http://www2.oaklandnet.com/government/o/opr/s/Parks/JoaquinMiller/index.htm
-284	Mandana Plaza Park	600 Mandana Avenue &amp; Lakeshore Ave	37.80505999961946	-122.27301999967312	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
-330	Pine Knoll Park	Lakeshore Avenue &amp; Hanover Avenue	37.80505999961946	-122.27301999967312	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 212	Union Point Park	2311 Embarcadero	37.77899051876286	-122.24260248347878	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 211	Park Blvd Plaza Park	2100 Park Blvd	37.80063109648487	-122.24766069655746	t	f	t	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 33	ALAMO SQUARE	Hayes	37.77634875	-122.43467396	t	f	t	http://sfrecpark.org/destination/alamo-square/alamo-square-dog-play-area/
@@ -377,6 +373,10 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 200	WALTER HAAS DOG PLAY AREA	Addison	37.7404288	-122.4353688	t	t	f	http://sfrecpark.org/destination/walter-haas-playground/walter-haas-dog-play-areas/
 343	Crocker Amazon Dog Play Area	 Moscow & Geneva	37.7150164	-122.4277578	t	f	t	http://sfrecpark.org/destination/crocker-amazon-playground/crocker-amazon-dog-play-area/
 275	South Prescott Park	3rd Street/Chester Avenue	37.802979	-122.298131	t	f	t	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
+340	Channel Park	1 10th Street &amp; 21 7th Street	37.789937	-122.267393	\N	f	\N	\N
+328	Rockridge-Temescal Greenbelt (FROG Park)	Along Temescal Creek, Hudson St to Redondo Park	37.839154	-122.259550	t	f	f	http://www.frogpark.org/location/
+284	Mandana Plaza Park	600 Mandana Avenue &amp; Lakeshore Ave	37.812095	-122.241893	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
+330	Pine Knoll Park	Lakeshore Avenue &amp; Hanover Avenue	37.802077	-122.253939	t	f	f	http://www2.oaklandnet.com/Government/o/opr/s/DogPlayAreas/index.htm
 \.
 
 

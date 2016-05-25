@@ -4,7 +4,7 @@ from unittest import TestCase
 from model import Park, example_data, connect_to_db, db
 from server import app
 import server
-import creategeojson
+
 
 
 class FlaskTestsBasic(unittest.TestCase):
@@ -21,8 +21,6 @@ class FlaskTestsBasic(unittest.TestCase):
         result = self.client.get("/")
         self.assertIn("<h1>Bark Park!!</h1>", result.data)
 
-    # def test_creategeojson(self):
-    #     assert creategeojson()
 
 class FlaskTestsDatabase(TestCase):
     """Flask tests that use the database."""
@@ -52,13 +50,6 @@ class FlaskTestsDatabase(TestCase):
 
         result = self.client.get("/create_map_features.json")
         self.assertIn("JAPANTOWN PEACE PLAZA", result.data)
-
-
-    # def test_departments_details(self):
-    #     """Test departments page."""
-
-    #     result = self.client.get("/department/fin")
-    #     self.assertIn("Phone: 555-1000", result.data)
 
 if __name__ == "__main__":
     unittest.main()
