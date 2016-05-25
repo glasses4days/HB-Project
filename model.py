@@ -25,8 +25,76 @@ class Park(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Parks park_id=%s park_name=%s address=%s latitude=%s longitude=%s on_leash=%s off_leash_enclosed=%s off_leash_unenclosed=%s park_url=%s>" % (self.park_id, self.park_name, self.address, self.latitude, self.longitude, self.on_leash,
+        return "<Park park_id=%s park_name=%s address=%s latitude=%s longitude=%s on_leash=%s off_leash_enclosed=%s off_leash_unenclosed=%s park_url=%s>" % (self.park_id, self.park_name, self.address, self.latitude, self.longitude, self.on_leash,
             self.off_leash_enclosed, self.off_leash_unenclosed, self.park_url)
+
+class User(db.Model):
+    """User list"""
+
+    __tablename__ = "users"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    email = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(64), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        """Provide helpful representation when printed"""
+
+        return "<User user_id=%s email=%s password=%s created_at=%s>" % (self.user_id, self.email, self.password, self.created_at)
+
+class Comment(db.Model):
+    """Comment list"""
+
+    __tablename__ = "comments"
+
+    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    content = db.Column(db.String(2000), nullable=False)
+
+    # Define relationship to user
+
+    user = db.relationship("User", backref=db.backref('comments', order_by=comment_id))
+
+    # Define relationship to park
+
+    park = db.relationship("Park", backref=db.backref('comments', order_by=comment_id))
+
+    def __repr__(self):
+        """Provide helpful representation when printed"""
+
+        return "<Comment comment_id=%s user_id=%s park_id=%s created_at=%s content=%s>" % (self.comment_id,
+            self.user_id, self.park_id, self.created_at, self.content)
+
+class Photo(db.Model):
+    """Photo list"""
+
+    __tablename__ = "photos"
+
+    photo_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    content = db.Column(db.String(2000), nullable=False)
+    url = db.Column(db.Unicode(2083), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+
+    # Define relationship to user
+
+    user = db.relationship("User", backref=db.backref('photos', order_by=photo_id))
+
+    # Define relationship to park
+
+    park = db.relationship("Park", backref=db.backref('photos', order_by=photo_id))
+
+    def __repr__(self):
+        """Provide helpful representation when printed"""
+
+        return "<Photo photo_id=%s park_id=%s user_id=%s created_at=%s content=%s url=%s description=%s>" % (self.photo_id,
+            self.park_id, self.user_id, self.created_at, self.content, self.url, self.description)
+
 
 ##############################################################################
 #Creates test database
