@@ -6,6 +6,7 @@ def create_geojson(park):
 
     park_name = park.park_name
     park_id = park.park_id
+    park_url = park.park_url
     #checks if on_leash, off_leash_unenclosed, and off_leash_enclosed are
     #True or False in db. Have if/else for each, because each park can have
     #true for more than one filter
@@ -33,6 +34,7 @@ def create_geojson(park):
                  "properties": {
                  "title": park_name,
                  "park_id": park_id,
+                 "park_url": park_url,
                  "marker-symbol": "dog-park",
                  "on_leash": on_leash,
                  "off_leash_open": off_un,
