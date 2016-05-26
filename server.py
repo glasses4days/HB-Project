@@ -49,6 +49,14 @@ def create_map_features():
 
     return jsonify(markers)
 
+@app.route('/park_info/<park_id>')
+def display_park_info(park_id):
+    """Renders template dispaying the chosen park"""
+
+    park = Park.query.filter(Park.park_id==park_id).one()
+
+    return render_template("park_info.html", park=park)
+
 
 @app.route('/enter_info')
 def enter_park_info():
