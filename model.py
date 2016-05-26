@@ -77,7 +77,6 @@ class Photo(db.Model):
     park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
-    content = db.Column(db.String(2000), nullable=False)
     url = db.Column(db.Unicode(2083), nullable=False)
     description = db.Column(db.String(200), nullable=False)
 
@@ -92,8 +91,8 @@ class Photo(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Photo photo_id=%s park_id=%s user_id=%s created_at=%s content=%s url=%s description=%s>" % (self.photo_id,
-            self.park_id, self.user_id, self.created_at, self.content, self.url, self.description)
+        return "<Photo photo_id=%s park_id=%s user_id=%s created_at=%s url=%s description=%s>" % (self.photo_id,
+            self.park_id, self.user_id, self.created_at, self.url, self.description)
 
 
 ##############################################################################
