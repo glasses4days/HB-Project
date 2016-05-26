@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+<p> 
+    {{ park.park_name }} <br>
+
+    {% if park.park_url %}
+        Find more information <a href="{{ park.park_url }}">here</a>.
+    {% endif %}
+
+    
+    {% if park.comments %}
+        <ul>Comments<br>
+        {% for comment in park.comments %}
+            <li>{{ comment.created_at }}<br>{{ comment.content }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+</p>
+</div>
+
+
+
+{% endblock %}
