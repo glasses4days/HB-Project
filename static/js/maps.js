@@ -18,6 +18,13 @@ $(document).ready(function() {
         $('#comment-box').html(Mustache.render(commentFormTemplate, {parkId: parkId}));
     });
 
+    $('#map').on('click', '.park-cta', function(evt) {
+        console.log("I clicked a marker");
+        // .target is the actual button and data object on the button
+        var parkId = evt.target.dataset.parkid;
+        // Here we are compiling the template from the script tag in homepage.html
+        // $('#comment-box').html(Mustache.render(commentFormTemplate, {parkId: parkId}));
+    });
 
     // Declaring this here because need to call it inside filter click handler
     var bindPopupToMarker = function(layer) {
@@ -52,7 +59,7 @@ $(document).ready(function() {
         var filter = $(this).data('filter');
         
         // Initialize empty array for park info.
-        var parkInfo = [];
+        var parkTitles = [];
         //Adds the class active and removes it from siblings
         $(this).addClass('active').siblings().removeClass('active');
         markers.setFilter(function(f) {
@@ -65,7 +72,7 @@ $(document).ready(function() {
                 if (f.properties[filter] === true) {
                     // Look through all parks and see if filter is true
                     // If it is, push it to the list. 
-                    parkInfo.push(f.properties['title']);
+                    parkTitles.push(f.properties['title']);
                     return true;
                 } else {
                     return false;
@@ -76,8 +83,9 @@ $(document).ready(function() {
         });
         // call bindPopuptoMarker because .setFilter is destroying popup cotent
         markers.eachLayer(bindPopupToMarker);
+        
         //Insert parkInfo into the park-info div
-        $('#park-info').html(parkInfo);
+        $('#park-titles').html(parkTitles);
         return false;
     });
 
