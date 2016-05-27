@@ -5,6 +5,7 @@ and interaction (filtering etc). -->
 {% block content %}
 <h1>Bark Park!!</h1>
 <div id="park-info"></div>
+<div id="comment-box"></div>
 <nav class='menu-ui'>
   <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
   <a href='#' data-filter='on_leash' id='on_l'>On Leash</a>
@@ -16,5 +17,23 @@ and interaction (filtering etc). -->
 
 <div id='map' style='width: 800px; height: 600px;'></div>
 <script src="/static/js/maps.js"></script>
+<!-- raw tell jinja to skip this -->
+{% raw %}
+<!-- Each template gets a script with the type below and an id that makes sense -->
+<script id="popup-template" type="x-tmpl-mustache">
+    //Much like jinja, keys are created when compiling the template with Mustache.render in maps.js file
+    <a href="/park_info/{{ parkId }}">{{ parkName }}</a>
+    <button class="comment-cta" data-parkId="{{ parkId }}">Leave a comment</button>
+
+</script>
+<script id="comment-form" type="x-tmpl-mustache">
+    <form action="/add_new_comment/{{ parkId }}" method="POST">
+        <label for="comment">Comment<br>
+        <input type="text" name="comment" required="required"></input>
+        </label>
+        <input type="submit" id='create-comment'></input>
+    </form>
+</script>
+{% endraw %}
 {% endblock %}
 
