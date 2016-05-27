@@ -34,7 +34,8 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=False)
+    user_name = db.Column(db.String(15), nullable=False, unique=True)
+    email = db.Column(db.String(64), nullable=False, unique=True)
     password = db.Column(db.String(64), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
 
