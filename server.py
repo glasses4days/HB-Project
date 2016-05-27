@@ -5,7 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
 from sqlalchemy import update
 import simplejson as json
-from model import connect_to_db, db, Park
+from model import connect_to_db, db, Park, User, Comment, Photo
 from creategeojson import create_geojson
 
 app = Flask(__name__)
@@ -56,6 +56,28 @@ def display_park_info(park_id):
     park = Park.query.filter(Park.park_id==park_id).one()
 
     return render_template("park_info.html", park=park)
+
+@app.route('/signup_form')
+def render_signup():
+    """Render signup form template"""
+
+    return render_template("signup.html")
+
+@app.route('/add_new_user', methods=["POST"])
+def add_new_user():
+    """Check for user and add to database"""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+    age = request.form.get("age")
+    zipcode = request.form.get("zipcode")
+
+    user = User(email=email, password=password,
+                age=age, zipcode=zipcode)
+
+
+    db.session.add(user)
+    db.session.commit()
 
 
 @app.route('/enter_info')
