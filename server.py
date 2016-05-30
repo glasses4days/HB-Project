@@ -7,6 +7,7 @@ from sqlalchemy import update
 import simplejson as json
 from model import connect_to_db, db, Park, User, Comment, Photo
 from creategeojson import create_geojson
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -70,19 +71,55 @@ def add_new_user():
     user_name = request.form.get("user_name")
     email = request.form.get("email")
     password = request.form.get("password")
+    created_at = datetime.now()
 
-    new_user = User(user_name=user_name, email=email, password=password)
+    new_user = User(user_name=user_name, email=email, password=password, created_at=created_at)
 
     try:
         User.query.filter(User.email == email).one()
+        # Probably need to do somthing else here instead of just printing that
+        # the user exists
         print "This user exists"
     except:
         db.session.add(new_user)
+        flash("Successfully signed up. Please login.")
 
     db.session.commit()
 
-    return redirect('/')
+    return redirect('/sign_in_form')
 
+@app.route('/sign_in_form')
+def render_sign_in_form():
+    """Renders sign in form template"""
+
+    return render_template('sign_in_form.html')
+
+@app.route('/sign_in', methods=["POST"])
+def sign_in():
+    """Checks if username/password is correct and logs in"""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    try:
+        User.query.filter(User.email == email, User.password == password).one()
+        session['user'] = email
+        print session
+        return redirect('/')
+    except:
+        print email, password
+        return "False"
+
+@app.route('/logout')
+def logout():
+    """User is logged out of session"""
+
+    session['user'] = ''
+
+    flash('Logged out punk')
+    print "Logged out"
+
+    return redirect('/')
 
 @app.route('/enter_info')
 def enter_park_info():
