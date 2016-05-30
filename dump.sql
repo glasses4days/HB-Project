@@ -34,6 +34,42 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: cooper
+--
+
+CREATE TABLE comments (
+    comment_id integer NOT NULL,
+    user_id integer NOT NULL,
+    park_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    content character varying(2000) NOT NULL
+);
+
+
+ALTER TABLE comments OWNER TO cooper;
+
+--
+-- Name: comments_comment_id_seq; Type: SEQUENCE; Schema: public; Owner: cooper
+--
+
+CREATE SEQUENCE comments_comment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE comments_comment_id_seq OWNER TO cooper;
+
+--
+-- Name: comments_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cooper
+--
+
+ALTER SEQUENCE comments_comment_id_seq OWNED BY comments.comment_id;
+
+
+--
 -- Name: parks; Type: TABLE; Schema: public; Owner: cooper
 --
 
@@ -74,10 +110,122 @@ ALTER SEQUENCE parks_park_id_seq OWNED BY parks.park_id;
 
 
 --
+-- Name: photos; Type: TABLE; Schema: public; Owner: cooper
+--
+
+CREATE TABLE photos (
+    photo_id integer NOT NULL,
+    park_id integer NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    url character varying(2083) NOT NULL,
+    description character varying(200) NOT NULL
+);
+
+
+ALTER TABLE photos OWNER TO cooper;
+
+--
+-- Name: photos_photo_id_seq; Type: SEQUENCE; Schema: public; Owner: cooper
+--
+
+CREATE SEQUENCE photos_photo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE photos_photo_id_seq OWNER TO cooper;
+
+--
+-- Name: photos_photo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cooper
+--
+
+ALTER SEQUENCE photos_photo_id_seq OWNED BY photos.photo_id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: cooper
+--
+
+CREATE TABLE users (
+    user_id integer NOT NULL,
+    email character varying(64) NOT NULL,
+    password character varying(64) NOT NULL,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO cooper;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: cooper
+--
+
+CREATE SEQUENCE users_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_user_id_seq OWNER TO cooper;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: cooper
+--
+
+ALTER SEQUENCE users_user_id_seq OWNED BY users.user_id;
+
+
+--
+-- Name: comment_id; Type: DEFAULT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY comments ALTER COLUMN comment_id SET DEFAULT nextval('comments_comment_id_seq'::regclass);
+
+
+--
 -- Name: park_id; Type: DEFAULT; Schema: public; Owner: cooper
 --
 
 ALTER TABLE ONLY parks ALTER COLUMN park_id SET DEFAULT nextval('parks_park_id_seq'::regclass);
+
+
+--
+-- Name: photo_id; Type: DEFAULT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY photos ALTER COLUMN photo_id SET DEFAULT nextval('photos_photo_id_seq'::regclass);
+
+
+--
+-- Name: user_id; Type: DEFAULT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('users_user_id_seq'::regclass);
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: cooper
+--
+
+COPY comments (comment_id, user_id, park_id, created_at, content) FROM stdin;
+1	2	37	2016-05-25 00:00:00	I love this park. It"s G-L-O-R-I-O-U-S, GLORIOUS!
+2	2	260	2016-05-25 00:00:00	This is my least favorite park. Under an overpass, darky and asphalt.
+3	2	38	2015-05-26 00:00:00	This is my favorite off leash park. Not fenced in. Love it when the fog rolls in around 4pm
+4	3	38	2015-05-26 00:00:00	pretty great
+\.
+
+
+--
+-- Name: comments_comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cooper
+--
+
+SELECT pg_catalog.setval('comments_comment_id_seq', 4, true);
 
 
 --
@@ -119,7 +267,6 @@ COPY parks (park_id, park_name, address, latitude, longitude, on_leash, off_leas
 57	BROTHERHOOD/CHESTER MINI PARK	501 Brotherhood Wy	37.71238249	-122.46990318	t	\N	\N	\N
 59	BUCHANAN STREET MALL	Buchanan	37.77949531	-122.42856481	t	\N	\N	\N
 61	BUSH/BRODERICK MINI PARK	Baker	37.78557814	-122.44253511	t	\N	\N	\N
-63	CAMP MATHER	32560 Mather Rd	37.88160218	-119.85076005	t	\N	\N	\N
 64	CARL LARSEN PARK	19th Ave	37.73929782	-122.47596603	t	\N	\N	\N
 66	CAYUGA/LAMARTINE MINI PARK	Cayuga	37.73033758	-122.43294264	t	\N	\N	\N
 67	CHESTNUT/KEARNY OPEN SPACE	Chestnut	37.80454125	-122.4070907	t	\N	\N	\N
@@ -388,11 +535,99 @@ SELECT pg_catalog.setval('parks_park_id_seq', 344, true);
 
 
 --
+-- Data for Name: photos; Type: TABLE DATA; Schema: public; Owner: cooper
+--
+
+COPY photos (photo_id, park_id, user_id, created_at, url, description) FROM stdin;
+\.
+
+
+--
+-- Name: photos_photo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cooper
+--
+
+SELECT pg_catalog.setval('photos_photo_id_seq', 1, false);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: cooper
+--
+
+COPY users (user_id, email, password, created_at) FROM stdin;
+2	pattismith@host.com	password	2016-05-25 00:00:00
+3	robertmaplethorpe@host.com\n	password	2016-05-25 00:00:00
+\.
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cooper
+--
+
+SELECT pg_catalog.setval('users_user_id_seq', 3, true);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (comment_id);
+
+
+--
 -- Name: parks_pkey; Type: CONSTRAINT; Schema: public; Owner: cooper
 --
 
 ALTER TABLE ONLY parks
     ADD CONSTRAINT parks_pkey PRIMARY KEY (park_id);
+
+
+--
+-- Name: photos_pkey; Type: CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT photos_pkey PRIMARY KEY (photo_id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: comments_park_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_park_id_fkey FOREIGN KEY (park_id) REFERENCES parks(park_id);
+
+
+--
+-- Name: comments_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+--
+-- Name: photos_park_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT photos_park_id_fkey FOREIGN KEY (park_id) REFERENCES parks(park_id);
+
+
+--
+-- Name: photos_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: cooper
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT photos_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --
