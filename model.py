@@ -42,7 +42,7 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<User user_id=%s email=%s password=%s created_at=%s>" % (self.user_id, self.email, self.password, self.created_at)
+        return "<User user_id=%s user_name=%s email=%s password=%s created_at=%s>" % (self.user_id, self.user_name, self.email, self.password, self.created_at)
 
 class Comment(db.Model):
     """Comment list"""
