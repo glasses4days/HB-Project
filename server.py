@@ -67,17 +67,21 @@ def render_signup():
 def add_new_user():
     """Check for user and add to database"""
 
+    user_name = request.form.get("user_name")
     email = request.form.get("email")
     password = request.form.get("password")
-    age = request.form.get("age")
-    zipcode = request.form.get("zipcode")
 
-    user = User(email=email, password=password,
-                age=age, zipcode=zipcode)
+    new_user = User(user_name=user_name, email=email, password=password)
 
+    try:
+        User.query.filter(User.email == email).one()
+        print "This user exists"
+    except:
+        db.session.add(new_user)
 
-    db.session.add(user)
     db.session.commit()
+
+    return redirect('/')
 
 
 @app.route('/enter_info')
