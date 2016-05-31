@@ -100,11 +100,14 @@ def sign_in():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    # TypeError: 'BaseQuery' object is not callable
+    user_id = User.query(User.user_id).filter(User.email == email).one()
+
 
     try:
         User.query.filter(User.email == email, User.password == password).one()
-        session['user'] = email
-        print session
+        # session['user'] = user_id
+        print user_id
         return redirect('/')
     except:
         print email, password
