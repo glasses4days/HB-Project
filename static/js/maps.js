@@ -18,6 +18,16 @@ $(document).ready(function() {
         $('#comment-box').html(Mustache.render(commentFormTemplate, {parkId: parkId}));
     });
 
+    // WORK IN PROGRESS: Submits comment to db.
+    $('#submit-comment').on('click', function(evt) {
+        evt.preventDefault();
+        var parkId = evt.target.dataset.parkid;
+        console.log(parkId);
+
+
+    });
+
+    // WORK IN PROGRESS: show park info on click 
     $('#map').on('click', '.park-cta', function(evt) {
         console.log("I clicked a marker");
         // .target is the actual button and data object on the button
