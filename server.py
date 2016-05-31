@@ -100,17 +100,20 @@ def sign_in():
 
     email = request.form.get("email")
     password = request.form.get("password")
-    # TypeError: 'BaseQuery' object is not callable
-    user_id = User.query(User.user_id).filter(User.email == email).one()
+    user_id = User.query.filter(User.email == email).one().user_id
+    user_name = User.query.filter(User.email == email).one().user_name
 
 
     try:
         User.query.filter(User.email == email, User.password == password).one()
-        # session['user'] = user_id
+        session['user'] = user_id
         print user_id
+        flash('Welcome ' + user_name)
         return redirect('/')
+                        # user_id=user_id)
     except:
         print email, password
+        flash('Try Again')
         return "False"
 
 @app.route('/logout')
@@ -119,7 +122,7 @@ def logout():
 
     session['user'] = ''
 
-    flash('Logged out punk')
+    flash('Logged out')
     print "Logged out"
 
     return redirect('/')
