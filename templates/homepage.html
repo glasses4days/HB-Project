@@ -35,9 +35,10 @@ and interaction (filtering etc). -->
 <script id="comment-form" type="x-tmpl-mustache">
     <form action="/add_new_comment/{{ parkId }}" method="POST">
         <label for="comment">Comment<br>
+        <input type='hidden' name='user_id' value={{ user_id }}></input>
         <input type="text" name="comment" required="required"></input>
         </label>
-        <input type="submit" id='create-comment'></input>
+        <input type="submit" id='submit-comment'></input>
     </form>
 </script>
 <script id="park-template" type="x-tmpl-mustache">
