@@ -77,9 +77,8 @@ def add_new_user():
 
     try:
         User.query.filter(User.email == email).one()
-        # Probably need to do somthing else here instead of just printing that
-        # the user exists
-        print "This user exists"
+        flash("This user already exists. Please try another username/email combination.")
+        redirect('/')
     except:
         db.session.add(new_user)
         flash("Successfully signed up. Please login.")
@@ -132,6 +131,25 @@ def enter_park_info():
     """Form to enter information missing from db"""
 
     return render_template("enter_missing_info.html")
+
+@app.route('/add_new_comment/<park_id>', methods=["POST"])
+def add_new_comment(park_id):
+    """Adds new comment to db"""
+
+    park_id = park_id
+    user_id = session['user']
+    content = request.form.get("content")
+    created_at = datetime.now()
+
+    new_comment = Comment(park_id=park_id, user_id=user_id, content=content, created_at=created_at)
+
+
+
+    db.session.add(new_comment)
+
+    db.session.commit()
+
+    return redirect('/')
 
 
 @app.route('/enter_info', methods=["POST"])

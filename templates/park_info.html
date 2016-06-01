@@ -12,7 +12,7 @@
     {% if park.comments %}
         <ul>Comments<br>
         {% for comment in park.comments %}
-            <li>{{ comment.created_at }}<br>{{ comment.content }}</li>
+            <li>{{ comment.created_at.strftime("%b %d %Y %H:%M") }}<br>{{ comment.content }}</li>
         {% endfor %}
         </ul>
     {% endif %}

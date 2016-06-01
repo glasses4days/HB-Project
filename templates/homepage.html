@@ -10,6 +10,7 @@ and interaction (filtering etc). -->
 <div id="park-titles"></div>
 <div id="park-info"></div>
 <div id="comment-box"></div>
+<div id="comment-success"></div>
 <nav class='menu-ui'>
   <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
   <a href='#' data-filter='on_leash' id='on_l'>On Leash</a>
@@ -22,10 +23,12 @@ and interaction (filtering etc). -->
 <div id='map' style='width: 800px; height: 600px;'></div>
 <script src="/static/js/maps.js"></script>
 <!-- <script src="/static/js/signup.js"></script> -->
-<!-- raw tell jinja to skip this -->
+
+<!-- raw tells jinja to skip this  -->
 {% raw %}
-<!-- Each template gets a script with the type below and an id that makes sense -->
-<!-- Much like jinja, keys are created when compiling the template with Mustache.render in maps.js file -->
+<!--  Each template gets a script with the type below and an id that makes sense 
+Much like jinja, keys are created when compiling the template with Mustache.render in maps.js file -->
+
 <script id="popup-template" type="x-tmpl-mustache">
     // <a href="/park_info/{{ parkId }}">{{ parkName }}</a>
     <h1 class='park-cta'>{{ parkName }}</h1>
@@ -36,7 +39,7 @@ and interaction (filtering etc). -->
     <form action="/add_new_comment/{{ parkId }}" method="POST">
         <label for="comment">Comment<br>
         <input type='hidden' name='user_id' value={{ user_id }}></input>
-        <input type="text" name="comment" required="required"></input>
+        <input type="text" name="content" required="required"></input>
         </label>
         <input type="submit" id='submit-comment'></input>
     </form>
@@ -47,6 +50,7 @@ and interaction (filtering etc). -->
     Comments
 
 </script>
+
 {% endraw %}
 {% endblock %}
 
