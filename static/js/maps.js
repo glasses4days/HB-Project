@@ -162,10 +162,15 @@ $(document).ready(function() {
             // return (filter === 'all') ? true : f.properties[filter] === true;
         });
         // call bindPopuptoMarker because .setFilter is destroying popup cotent
-        markers.eachLayer(bindPopupToMarker);
-        
-        //Insert parkInfo into the park-info div
-        $('#park-titles').html(parkTitles);
+        // markers.eachLayer(bindPopupToMarker);
+        var parkHtml = "<ul>";
+        parkTitles.forEach(function(park) {
+            parkItem = "<li>" + park.toUpperCase() + "</li>";
+            parkHtml += parkItem;
+        });
+
+        parkHtml += "</ul";
+        $('#park-titles').html(parkHtml);
         return false;
     });
 
