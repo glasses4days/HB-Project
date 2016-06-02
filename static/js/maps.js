@@ -1,35 +1,37 @@
 // JS script relating to map interaction lives here. 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
-var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 12);
+var map = L.mapbox.map('map', 'mapbox.streets').setView([37.799648, -122.354083], 12, {
+    accessToken: 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ'
+});
 
 
-var currentFilters = {
-    type: 'off_leash_fenced',
-    distance: '5000'
-}
+// var currentFilters = {
+//     type: 'off_leash_fenced',
+//     distance: '5000'
+// }
 
-var filters = function(marker) {
-    if (
-        marker.feature.type === currentFilters.type
-        && marker.feature.latlong.distanceTo(other thing???) < currentFilters.distance
-        && .....
-        ) {
-        return true
-    } else {
-        return false
-    }
-}
+// var filters = function(marker) {
+//     if (
+//         marker.feature.type === currentFilters.type
+//         && marker.feature.latlong.distanceTo(other thing???) < currentFilters.distance
+//         && .....
+//         ) {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
 
-var updateFilters(e) = function(e) {
-    markers.setFilter(filters)
-}
+// var updateFilters(e) = function(e) {
+//     markers.setFilter(filters)
+// }
 
-var bindEvents = function(map) {
-    map.on('click', updateFilters)
-    map.on('locationfound', updateFilters)
-    map.on('moveend', updateFilters)
-}
+// var bindEvents = function(map) {
+//     map.on('click', updateFilters)
+//     map.on('locationfound', updateFilters)
+//     map.on('moveend', updateFilters)
+// }
 
 
 $(document).ready(function() {
@@ -40,6 +42,7 @@ $(document).ready(function() {
     // This is from mapbox documentation, on click of map div the event handler 
     // to button ...
     $('#map').on('click', '.comment-cta', function(evt) {
+        console.log('rendering comment form template');
         // .target is the actual button and data object on the button
         var parkId = evt.target.dataset.parkid;
         // Here we are compiling the template from the script tag in homepage.html
@@ -69,6 +72,7 @@ $(document).ready(function() {
 
     // Declaring this here because need to call it inside filter click handler
     var bindPopupToMarker = function(layer) {
+        console.log('bindPopupToMarker renders Mustache template for markers');
         // here you call `bindPopup` with a string of HTML you create - the feature
         // properties declared above are available under `layer.feature.properties` 
         var popupTemplate = $('#popup-template').html();
@@ -84,13 +88,13 @@ $(document).ready(function() {
     //.then accesses the geojson promise and then I can access the markers
     // in order to add a link to the html.
     geojson.then(function(data){
+        L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
+        console.log('geojson.then marker bindPopup');
         // This comes directly from mapbox api custom-popup
         markers.eachLayer(bindPopupToMarker);
         markers.on('click', function(marker) {
-            console.log(marker);
-            console.log(marker.layer.feature.properties);
             $.get('/park_info/' + marker.layer.feature.properties.park_id).then(function(content) {
-                console.log(content);
+                L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
                 var onlyWhatWeWant = $(content);
                 $('#park-info').html(onlyWhatWeWant);
             });
@@ -104,29 +108,33 @@ $(document).ready(function() {
 
 
 
-    var myDistances = {}
-    map.on('locationfound', function(e) {
-            myDistances[] e.latlng.distanceTo(L.latLng(
-                feature.geometry.coordinates[1],
-                feature.geometry.coordinates[0])) < 5000;
-        });
-    })
-    map.on('moveend', function(e) {
-        // map.flyTo(e.latlng);
-        // console.log([e.latlng.lng, e.latlng.lat]);
-        var bounds = map.getBounds();
-        markers.setFilter(function(feature) {
-            return bounds.contains(L.latLng(
-                feature.geometry.coordinates[1],
-                feature.geometry.coordinates[0]));
-            // return e.latlng.distanceTo(L.latLng(
-            //     feature.geometry.coordinates[1],
-            //     feature.geometry.coordinates[0])) < 5000;
-        });
+    // var myDistances = {};
+    // map.on('locationfound', function(e) {
+    //         console.log(e);
+    //         myDistances, e.latlng.distanceTo(L.latLng(
+    //             feature.geometry.coordinates[1],
+    //             feature.geometry.coordinates[0])) < 5000;
+    //     });
 
-    });
+    // map.on('moveend', function(e) {
+    //     console.log('map.on moveend');
+    //     // map.flyTo(e.latlng);
+    //     // console.log([e.latlng.lng, e.latlng.lat]);
+    //     var bounds = map.getBounds();
+    //     markers.setFilter(function(feature) {
+    //         return bounds.contains(L.latLng(
+    //             feature.geometry.coordinates[1],
+    //             feature.geometry.coordinates[0]));
+    //         // return e.latlng.distanceTo(L.latLng(
+    //         //     feature.geometry.coordinates[1],
+    //         //     feature.geometry.coordinates[0])) < 5000;
+    //     });
 
-    $('.menu-ui a').on('click', function() {
+    // });
+
+    $('.park-types').on('click', function() {
+        L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xhc3NlczRkYXlzIiwiYSI6ImNpbzBpa3VnODFhNmd1a20zamx3M21xNjMifQ.YAac-e2qviFlZOykJE4riQ';
+        console.log('on click filter');
         // For each filter link, get the 'data-filter' attribute value.
         var filter = $(this).data('filter');
         
