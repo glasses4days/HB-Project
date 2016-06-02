@@ -3,27 +3,53 @@ and interaction (filtering etc). -->
 
 {% extends 'base.html' %}
 {% block content %}
-<h1>Bark Park!!</h1>
-<a href='/signup_form'><button type="button" id="signup">Sign Up</button></a>
-<a href='/sign_in_form'><button type="button" id="signin">Sign In</button></a>
-<a href='/logout'><button type="button" id="logout">Logout</button></a>
-<div id="park-titles"></div>
-<div id="park-info"></div>
-<div id="comment-box"></div>
-<div id="comment-success"></div>
-<nav class='menu-ui'>
-  <!-- <a href='#' class='active' id='filter-all'>All Parks</a> -->
-  <a href='#' data-filter='on_leash' id='on_l'>On Leash</a>
-  <a href='#' data-filter='off_leash_fenced' id='off_l_f'>Fenced</a>
-  <a href='#' data-filter='off_leash_open' id='off_l_o'>Off Leash Open</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand navbar-center">Bark Park!</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='/signup_form' id="signup">Sign up</a></li>
+        <li><a href='/sign_in_form' id="signin">Sign in</a></li>
+        <li><a href='/logout' id="logout">Logout</a></li>         
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
-<!-- 
-<a href='#' id='geolocate' class='ui-button'>Find me</a> -->
 
-<div id='map' style='width: 800px; height: 600px;'></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="sidebar-nav">
+          <li><a href='#' class="park-types" data-filter='on_leash' id='on_l'>On Leash</a></li>
+          <li><a href='#' class="park-types" data-filter='off_leash_fenced' id='off_l_f'>Fenced</a></li>
+          <li><a href='#' class="park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash Open</a></li>
+        </ul>
+        <div id="park-titles"></div>
+      </div>
+          <div class="col-md-6">
+            <div id='map' style='width: 800px; height: 600px;'></div>
+          </div>
+      <div class="col-md-3">
+        <div id="park-info"></div>
+        <div id="comment-box"></div>
+        <div id="comment-success"></div>
+      </div>
+    </div>
+  </div>
+
 <script src="/static/js/maps.js"></script>
-<!-- <script src="/static/js/signup.js"></script> -->
-
 <!-- raw tells jinja to skip this  -->
 {% raw %}
 <!--  Each template gets a script with the type below and an id that makes sense 
