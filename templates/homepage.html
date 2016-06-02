@@ -31,15 +31,15 @@ and interaction (filtering etc). -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-        <ul class="sidebar-nav">
-          <li><a href='#' class="park-types" data-filter='on_leash' id='on_l'>On Leash</a></li>
-          <li><a href='#' class="park-types" data-filter='off_leash_fenced' id='off_l_f'>Fenced</a></li>
-          <li><a href='#' class="park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash Open</a></li>
-        </ul>
+        <div class="sidebar-nav">
+          <a href='#' class="park-types" data-filter='on_leash' id='on_l'>On Leash</a>
+          <a href='#' class="park-types" data-filter='off_leash_fenced' id='off_l_f'>Fenced</a>
+          <a href='#' class="park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash Open</a>
+        </div>
         <div id="park-titles"></div>
       </div>
           <div class="col-md-6">
-            <div id='map' style='width: 800px; height: 600px;'></div>
+            <div id='map' style='width: 667px; height: 500px;'></div>
           </div>
       <div class="col-md-3">
         <div id="park-info"></div>
@@ -56,11 +56,10 @@ and interaction (filtering etc). -->
 Much like jinja, keys are created when compiling the template with Mustache.render in maps.js file -->
 
 <script id="popup-template" type="x-tmpl-mustache">
-    // <a href="/park_info/{{ parkId }}">{{ parkName }}</a>
     <h1 class='park-cta'>{{ parkName }}</h1>
     <button class="comment-cta" data-parkId="{{ parkId }}">Leave a comment</button>
-
 </script>
+
 <script id="comment-form" type="x-tmpl-mustache">
     <form action="/add_new_comment/{{ parkId }}" method="POST">
         <label for="comment">Comment<br>
@@ -70,12 +69,7 @@ Much like jinja, keys are created when compiling the template with Mustache.rend
         <input type="submit" id='submit-comment'></input>
     </form>
 </script>
-<script id="park-template" type="x-tmpl-mustache">
-    <h1>{{ parkName }}</h1>
-    <a href="{{ parkUrl }}">More information available here</a>
-    Comments
 
-</script>
 
 {% endraw %}
 {% endblock %}
