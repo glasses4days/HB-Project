@@ -12,14 +12,17 @@
     {% if park.comments %}
         <ul>Comments<br>
         {% for comment in park.comments %}
-            <li>{{ comment.created_at.strftime("%b %d %Y %H:%M") }}<br>{{ comment.content }}</li>
+            <li>{{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
         {% endfor %}
         </ul>
     {% endif %}
 
 </p>
-</div>
-
-
-
+<form action="/add_new_comment/{{ park.park_id }}" method="POST">
+        <label for="comment">Leave a comment<br>
+       
+        <input type="text" name="content" required="required"></input>
+        </label>
+        <input type="submit" id='submit-comment'></input>
+</form>
 {% endblock %}
