@@ -151,6 +151,24 @@ def add_new_comment(park_id):
 
     return redirect('/')
 
+@app.route('/add_new_photo/<park_id>', methods=["POST"])
+def add_new_photo(park_id):
+    """Adds new photo to db"""
+
+    park_id = park_id
+    user_id = session['user']
+    created_at = datetime.now()
+    description = "Having a great time at the park!"
+    url = request.form.get("photo")
+
+    new_photo = Photo(park_id=park_id, user_id=user_id, created_at=created_at, description=description, url=url)
+
+    db.session.add(new_photo)
+
+    db.session.commit()
+
+    return redirect('/')
+
 
 @app.route('/enter_info', methods=["POST"])
 def update_info_in_db():
