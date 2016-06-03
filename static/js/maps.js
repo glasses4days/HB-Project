@@ -81,7 +81,7 @@ $(document).ready(function() {
             parkHtml += parkItem;
         });
 
-        parkHtml += "</ul";
+        parkHtml += "</ul>";
         $('#park-titles').html(parkHtml);
         return false;
     });
