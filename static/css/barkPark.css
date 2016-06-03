@@ -1,7 +1,6 @@
-.park-types {
-    display: inline;
+/*.park-types {
 
-}
+}*/
 
 .scroll {
     overflow-y: scroll;
@@ -9,7 +8,8 @@
 }
 
 .park-img {
-
+    padding-top: 1em;
+    padding-bottom: 1em;
     width: 150px;
 
 }
@@ -20,5 +20,10 @@ li {
 }
 
 .form {
-    padding-top:3em;
+    padding-top: 2em;
+}
+
+.nav {
+    padding: 5px;
+
 }
