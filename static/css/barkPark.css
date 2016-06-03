@@ -10,6 +10,15 @@
 
 .park-img {
 
-        
+    width: 150px;
 
+}
+
+li {
+    padding-top: 5px;
+    list-style: none;
+}
+
+.form {
+    padding-top:3em;
 }
