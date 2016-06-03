@@ -20,8 +20,14 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
+    if 'user' in session:
+        session_state = True
+        print "In a session!"
+    else:
+        session_state = False
+        print "Not in a session!"
 
-    return render_template("homepage.html")
+    return render_template("homepage.html", session_state=session_state)
 
 
 @app.route('/create_map_features.json')
@@ -119,7 +125,7 @@ def sign_in():
 def logout():
     """User is logged out of session"""
 
-    session['user'] = ''
+    del session['user']
 
     flash('Logged out')
     print "Logged out"
