@@ -2,3 +2,14 @@
     display: inline;
 
 }
+
+.scroll {
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.park-img {
+
+        
+
+}
