@@ -12,14 +12,11 @@ and interaction (filtering etc). -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
       <ul class="nav navbar-nav navbar-right">
         {% if session_state %}
-        <li><a href='/logout' id="logout">Logout</a></li>
+        <li><button type="button" class="btn btn-default session-cta"><a href='/logout' id="logout">Logout</a></button></li>
         {% else %}
-        <li><a href='/signup_form' id="signup">Sign up</a></li>
-        <li><a href='/sign_in_form' id="signin">Sign in</a></li>
+        <li><button type="button" class="btn btn-default session-cta"><a href='/signup_form' id="signup">Sign up</a></button></li>
+        <li><button type="button" class="btn btn-default session-cta"><a href='/sign_in_form' id="signin">Sign in</a></button></li>
         {% endif %}
-        
-                
-        </li>
       </ul>
     </div>
   </div>
@@ -28,9 +25,9 @@ and interaction (filtering etc). -->
     <div class="row">
       <div class="col-md-3">
         <div class="sidebar-nav">
-          <a href='#' class="park-types" data-filter='on_leash' id='on_l'>All</a>
-          <a href='#' class="park-types" data-filter='off_leash_fenced' id='off_l_f'>Enclosed</a>
-          <a href='#' class="park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash</a>
+          <button type="button" class="btn btn-default park-types" data-filter='on_leash' id='on_l'>All</button>
+          <button type="button" class="btn btn-default park-types" data-filter='off_leash_fenced' id='off_l_f'>Enclosed</button>
+          <button type="button" class="btn btn-default park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash</button>
         </div>
         <div id="park-titles" class="scroll"></div>
       </div>
