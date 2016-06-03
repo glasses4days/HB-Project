@@ -5,6 +5,7 @@ and interaction (filtering etc). -->
 {% block content %}
 
   <div class="container-fluid">
+    
     <div class="jumbotron">
       <h1>Bark Park!</h1>
     </div>
@@ -26,20 +27,22 @@ and interaction (filtering etc). -->
           <a href='#' class="park-types" data-filter='off_leash_fenced' id='off_l_f'>Fenced</a>
           <a href='#' class="park-types" data-filter='off_leash_open' id='off_l_o'>Off Leash Open</a>
         </div>
-        <div id="park-titles"></div>
+        <div id="park-titles" class="scroll"></div>
       </div>
           <div class="col-md-6">
             <div id='map' style='width: 667px; height: 500px;'></div>
           </div>
       <div class="col-md-3">
-        <div id="park-info"></div>
+        <div id="park-info" class="scroll"></div>
         <div id="comment-box"></div>
         <div id="comment-success"></div>
       </div>
     </div>
   </div>
 
+
 <script src="/static/js/maps.js"></script>
+
 
 <!-- raw tells jinja to skip this  -->
 {% raw %}
