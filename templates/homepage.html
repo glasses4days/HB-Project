@@ -5,12 +5,9 @@ and interaction (filtering etc). -->
 {% block content %}
 
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="jumbotron">
       <h1>Bark Park!</h1>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
       <ul class="nav navbar-nav navbar-right">
         <li><a href='/signup_form' id="signup">Sign up</a></li>
@@ -18,8 +15,8 @@ and interaction (filtering etc). -->
         <li><a href='/logout' id="logout">Logout</a></li>         
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 
   <div class="container-fluid">
     <div class="row">
@@ -43,6 +40,7 @@ and interaction (filtering etc). -->
   </div>
 
 <script src="/static/js/maps.js"></script>
+
 <!-- raw tells jinja to skip this  -->
 {% raw %}
 <!--  Each template gets a script with the type below and an id that makes sense 
@@ -50,18 +48,8 @@ Much like jinja, keys are created when compiling the template with Mustache.rend
 
 <script id="popup-template" type="x-tmpl-mustache">
     <h1 class='park-cta'>{{ parkName }}</h1>
-    <button class="comment-cta" data-parkId="{{ parkId }}">Leave a comment</button>
 </script>
 
-<script id="comment-form" type="x-tmpl-mustache">
-    <form action="/add_new_comment/{{ parkId }}" method="POST">
-        <label for="comment">Comment<br>
-        <input type='hidden' name='user_id' value={{ user_id }}></input>
-        <input type="text" name="content" required="required"></input>
-        </label>
-        <input type="submit" id='submit-comment'></input>
-    </form>
-</script>
 
 
 {% endraw %}
