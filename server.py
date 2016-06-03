@@ -1,6 +1,6 @@
 """ Bark Park server """
 
-from flask import Flask, render_template, redirect, request, flash, session, g, jsonify
+from flask import Flask, render_template, redirect, request, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
 from sqlalchemy import update
@@ -83,11 +83,9 @@ def add_new_user():
 
     try:
         User.query.filter(User.email == email).one()
-        flash("This user already exists. Please try another username/email combination.")
         redirect('/')
     except:
         db.session.add(new_user)
-        flash("Successfully signed up. Please login.")
 
     db.session.commit()
 
@@ -113,12 +111,9 @@ def sign_in():
         User.query.filter(User.email == email, User.password == password).one()
         session['user'] = user_id
         print user_id
-        flash('Welcome ' + user_name)
-        return redirect('/')
-                        # user_id=user_id)
+        return redirect('/')             
     except:
         print email, password
-        flash('Try Again')
         return "False"
 
 @app.route('/logout')
@@ -127,7 +122,6 @@ def logout():
 
     del session['user']
 
-    flash('Logged out')
     print "Logged out"
 
     return redirect('/')
@@ -148,8 +142,6 @@ def add_new_comment(park_id):
     created_at = datetime.now()
 
     new_comment = Comment(park_id=park_id, user_id=user_id, content=content, created_at=created_at)
-
-
 
     db.session.add(new_comment)
 
@@ -214,6 +206,6 @@ if __name__ == "__main__":
 
     connect_to_db(app)
 
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run()
