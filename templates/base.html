@@ -17,11 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 </head>
 <body>
-    <ul>
-      {% for message in get_flashed_messages() %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
     {% block content %} Content Goes Here {% endblock %}    
 </body>
 </html>
