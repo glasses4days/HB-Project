@@ -12,12 +12,12 @@
     {% if park.comments %}
         <ul>Comments<br>
         {% for comment in park.comments %}
-            <li>{{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
+            <li>{{ comment.user.user_name }} on {{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
         {% endfor %}
         </ul>
     {% endif %}
 </p>
-<form action="/add_new_comment/{{ park.park_id }}" method="POST">
+<form action="/add_new_comment/{{ park.park_id }}" method="POST" class="form">
         <label for="comment">Leave a comment<br>
        
         <input type="text" name="content" required="required"></input>
@@ -32,7 +32,7 @@
         {% endfor %}
 {% endif %}
 
-<form action="/add_new_photo/{{ park.park_id }}" method="POST">
+<form action="/add_new_photo/{{ park.park_id }}" method="POST" class="form">
     <label for="photo">Add a photo<br>
     <input type="text" name="photo" required="required"></input>
     </label>
