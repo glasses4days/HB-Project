@@ -1,0 +1,14 @@
+[run]
+
+branch = True
+omit = 
+    env/*
+    static/js/future.js
+    templates/mustache_templates.html
+    .gitignore
+    dump.sql
+    requirements.txt
+    secrests.sh
+    seed.py
+    tests.py
+    static/all_maki_icons/*
