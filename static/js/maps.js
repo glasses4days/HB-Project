@@ -23,6 +23,7 @@ $(document).ready(function() {
 
     var geojson = $.get('/create_map_features.json', function (data) {
         var features = data.features;
+        allParks = features;
         markers = L.mapbox.featureLayer(features).addTo(map);
     });
 
@@ -72,7 +73,7 @@ $(document).ready(function() {
                 }
             }
         });
-
+        // 
         // call bindPopuptoMarker because .setFilter is destroying popup cotent
         // markers.eachLayer(bindPopupToMarker);
         var parkHtml = "<ul>";
@@ -80,7 +81,6 @@ $(document).ready(function() {
             parkItem = "<li>" + park.toUpperCase() + "</li>";
             parkHtml += parkItem;
         });
-
         parkHtml += "</ul>";
         $('#park-titles').html(parkHtml);
         return false;
