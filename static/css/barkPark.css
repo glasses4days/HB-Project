@@ -1,10 +1,63 @@
-/*.park-types {
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: #FCFFF5;
+    font-family: 'Raleway', sans-serif; 
+}
 
-}*/
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 55px;
+/*    color: #E7FFE5;*/
+    color: #DAE8D1;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+.header {
+    padding: 0;
+    margin: 0 0 25px 0;
+    height: 150px;
+    width: 100%;
+    opacity: 0.9;
+    background-image: url(/static/img/banner6.png);
+    border-radius: 0 0 5px 5px;
+
+}
+
+.title {
+    padding: 20px 0 0 50px;
+}
+
+.park-types {
+    margin: 10px;
+}
+
+.session-cta {
+    float: right;
+    margin: 5px;
+}
+
+#sign-up {
+    margin-top: 10px;
+}
 
 .scroll {
     overflow-y: scroll;
     height: 500px;
+
+}
+
+/*::-webkit-scrollbar {
+      width: 15px;
+}*/
+
+.map-div {
+    padding-top: 10px;
 }
 
 .park-img {
@@ -24,6 +77,6 @@ li {
 }
 
 .nav {
-    padding: 5px;
+    padding: 5px 20px 15px 0;
 
 }
