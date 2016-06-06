@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-<p> 
-    {{ park.park_name }} <br>
-
-    {% if park.park_url %}
-        Find more information <a href="{{ park.park_url }}">here</a>.
-    {% endif %}
-
+  <h3>{{ park.park_name }}</h3><br>
+    <p>
+        {% if park.park_url %}
+            Find more information <a href="{{ park.park_url }}">here</a>.
+        {% endif %}
+    </p>
+        
+        {% if park.comments %}
+            <h4>Comments</h4>
+            {% for comment in park.comments %}
+                <li>{{ comment.user.user_name }} on {{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
+            {% endfor %}
+        {% endif %}
     
-    {% if park.comments %}
-        <ul>Comments<br>
-        {% for comment in park.comments %}
-            <li>{{ comment.user.user_name }} on {{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-</p>
 <form action="/add_new_comment/{{ park.park_id }}" method="POST" class="form">
         <label for="comment">Leave a comment<br>
        
