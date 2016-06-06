@@ -4,26 +4,27 @@ and interaction (filtering etc). -->
 {% extends 'base.html' %}
 {% block content %}
 
-  <div class="container-fluid">
-    
-    <div class="jumbotron">
-      <h1>Bark Park!</h1>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
-      <ul class="nav navbar-nav navbar-right">
-        {% if session_state %}
-        <li><button type="button" class="btn btn-default session-cta"><a href='/logout' id="logout">Logout</a></button></li>
-        {% else %}
-        <li><button type="button" class="btn btn-default session-cta"><a href='/signup_form' id="signup">Sign up</a></button></li>
-        <li><button type="button" class="btn btn-default session-cta"><a href='/sign_in_form' id="signin">Sign in</a></button></li>
-        {% endif %}
-      </ul>
+  <div class="container-fluid header">
+    <div class="row">
+      <div class="col-md-6 title-div">
+        <h1 class="title">Bark Park!</h1>
+      </div>
+      <div class="col-md-offset-4 col-md-2 session-cta-div"
+          <ul class="nav navbar-nav navbar-right">
+          {% if session_state %}
+          <li><button type="button" class="btn btn-default session-cta"><a href='/logout' id="logout">Logout</a></button></li>
+          {% else %}
+          <li><button type="button" class="btn btn-default session-cta" id="sign-up"><a href='/signup_form' id="signup">Sign up</a></button></li>
+          <li><button type="button" class="btn btn-default session-cta" id="sign-in"><a href='/sign_in_form' id="signin">Sign in</a></button></li>
+          {% endif %}
+          </ul>
+      </div>
     </div>
   </div>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 park-div">
         <div class="sidebar-nav">
           <button type="button" class="btn btn-default park-types" data-filter='on_leash' id='on_l'>All</button>
           <button type="button" class="btn btn-default park-types" data-filter='off_leash_fenced' id='off_l_f'>Enclosed</button>
@@ -31,10 +32,10 @@ and interaction (filtering etc). -->
         </div>
         <div id="park-titles" class="scroll"></div>
       </div>
-          <div class="col-md-6">
-            <div id='map' style='width: 667px; height: 500px;'></div>
-          </div>
-      <div class="col-md-3">
+      <div class="col-md-6 map-div">
+        <div id='map' style='width: 667px; height: 500px;'></div>
+      </div>
+      <div class="col-md-3 park-div">
         <div id="park-info" class="scroll"></div>
         <div id="comment-box"></div>
         <div id="comment-success"></div>
