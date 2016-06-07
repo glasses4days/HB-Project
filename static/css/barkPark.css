@@ -9,8 +9,7 @@ body {
 h1 {
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: 55px;
-/*    color: #E7FFE5;*/
+    font-size: 65px;
     color: #DAE8D1;
 }
 
@@ -19,12 +18,13 @@ h3 {
 }
 
 .header {
-    padding: 0;
-    margin: 0 0 25px 0;
-    height: 150px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 25px;
+    height: 175px;
     width: 100%;
     opacity: 0.9;
-    background-image: url(/static/img/banner6.png);
+    background-image: url(/static/img/banner_1.png);
     border-radius: 0 0 5px 5px;
 
 }
@@ -40,10 +40,15 @@ h3 {
 .session-cta {
     float: right;
     margin: 5px;
+    text-decoration: none;
 }
 
 #sign-up {
     margin-top: 10px;
+}
+
+.form-control {
+    width: 80%;
 }
 
 .scroll {
@@ -52,19 +57,16 @@ h3 {
 
 }
 
-/*::-webkit-scrollbar {
-      width: 15px;
-}*/
-
 .map-div {
     padding-top: 10px;
 }
 
 .park-img {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    width: 150px;
-
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 200px;
+    margin-left: 10%;
+    border: 1px #484F47 solid;
 }
 
 li {
