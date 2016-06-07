@@ -4,23 +4,21 @@
   <h3>{{ park.park_name }}</h3><br>
     <p>
         {% if park.park_url %}
-            Find more information <a href="{{ park.park_url }}">here</a>.
+            Park website <a href="{{ park.park_url }}">here</a>.
         {% endif %}
     </p>
         
         {% if park.comments %}
             <h4>Comments</h4>
             {% for comment in park.comments %}
-                <li>{{ comment.user.user_name }} on {{ comment.created_at.strftime("%b %d %Y") }}<br>{{ comment.content }}</li>
+                <li><strong>{{ comment.user.user_name }} on {{ comment.created_at.strftime("%b %d %Y") }}:</strong><br>{{ comment.content }}</li>
             {% endfor %}
         {% endif %}
     
 <form action="/add_new_comment/{{ park.park_id }}" method="POST" class="form">
-        <label for="comment">Leave a comment<br>
-       
-        <input type="text" name="content" required="required"></input>
-        </label>
-        <input type="submit" id='submit-comment'></input>
+        <label for="comment">Leave a comment</label><br>
+        <textarea class="form-control" name="content" required="required" rows="3"></textarea></br>
+        <input type="submit" class="btn btn-default" id='submit-comment'></input>
 </form>
 
 {% if park.photos %}
@@ -31,10 +29,9 @@
 {% endif %}
 
 <form action="/add_new_photo/{{ park.park_id }}" method="POST" class="form">
-    <label for="photo">Add a photo<br>
-    <input type="text" name="photo" required="required"></input>
-    </label>
-    <input type="submit" id="submit-photo"></input>
+    <label for="photo">Add a photo</label><br>
+    <textarea class="form-control" name="photo" required="required" id="photo-input"></textarea></br>
+    <input type="submit" class="btn btn-default" id="submit-photo"></input>
 </form>
 
 {% endblock %}
