@@ -22,10 +22,8 @@ def index():
 
     if 'user' in session:
         session_state = True
-        print "In a session!"
     else:
         session_state = False
-        print "Not in a session!"
 
     return render_template("homepage.html", session_state=session_state)
 
@@ -110,8 +108,7 @@ def sign_in():
     try:
         User.query.filter(User.email == email, User.password == password).one()
         session['user'] = user_id
-        print user_id
-        return redirect('/')           
+        return redirect('/')
     except:
         print email, password
         return "False"
@@ -121,8 +118,6 @@ def logout():
     """User is logged out of session"""
 
     del session['user']
-
-    print "Logged out"
 
     return redirect('/')
 
@@ -158,6 +153,8 @@ def add_new_photo(park_id):
     created_at = datetime.now()
     description = "Having a great time at the park!"
     url = request.form.get("photo")
+
+    print park_id, url
 
     new_photo = Photo(park_id=park_id, user_id=user_id, created_at=created_at, description=description, url=url)
 
@@ -202,7 +199,7 @@ def update_info_in_db():
     return redirect('/enter_info')
 
 if __name__ == "__main__":
-    app.debug = True
+    # app.debug = True
 
     connect_to_db(app)
 
