@@ -122,17 +122,36 @@ def example_data():
                     off_leash_unenclosed = False,
                     park_url = None)
 
-    park_three = Park(park_id = 3, 
+    park_three = Park(park_id = 3,
                     park_name = 'JOSEPH CONRAD MINI PARK',
                     address = '601 Beach St',
                     latitude = 37.80667244,
                     longitude = -122.41906274,
-                    on_leash = True, 
+                    on_leash = True,
                     off_leash_enclosed = True,
                     off_leash_unenclosed = False,
                     park_url = 'http://sfrecpark.org/destination/joseph-conrad-mini-park/')
 
-    db.session.add_all([park_one, park_two, park_three])
+    user_one = User(user_id = 25,
+                    user_name = "username",
+                    email = "user@user.com",
+                    password = "password",
+                    created_at = "2016-05-30 15:57:26.494944")
+
+    comment_one = Comment(comment_id = 25,
+                          user_id = 25,
+                          park_id = 2,
+                          created_at = "2016-05-30 15:57:26.494944",
+                          content = "Love this park!")
+
+    photo_one = Photo(photo_id = 25,
+                      park_id = 2,
+                      user_id = 25,
+                      created_at = "2016-05-30 15:57:26.494944",
+                      url = "http://s3-media1.fl.yelpcdn.com/bphoto/l4EsXuldC3Pd5QNJ_u3A_Q/o.jpg",
+                      description = "Biggie having a great time!")
+
+    db.session.add_all([park_one, park_two, park_three, user_one, comment_one, photo_one])
     db.session.commit()
 
 ##############################################################################
