@@ -14,25 +14,27 @@ class FlaskTestsBasic(unittest.TestCase):
         self.client = server.app.test_client()
         # Show Flask errors that happen during tests
         server.app.config['TESTING'] = True
-        
 
     def test_homepage_render(self):
-        #Checks that the h1 is rendering in homepage.html
+        """Tests homepage properly renders"""
+
         result = self.client.get("/")
         self.assertIn("<h1 class=\"title\">Bark Park!</h1>", result.data)
 
     def test_signup_form_render(self):
-        #Checks that signup form is rendering properly
+        """Tests signup form render"""
+
         result = self.client.get("/signup_form")
         self.assertIn("<p>Please enter a user name and password</p>", result.data)
 
     def test_signin_form_render(self):
-        #Checks that signup form is rendering properly
+        """Tests sign in form render"""
+
         result = self.client.get("/sign_in_form")
         self.assertIn("<p>Please sign in</p>", result.data)
 
     def test_enter_info_render(self):
-        #Checks that signup form is rendering properly
+        """Tests enter info form render"""
         result = self.client.get("/enter_info")
         self.assertIn("Park id:", result.data)
 
