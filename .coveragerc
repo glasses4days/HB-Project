@@ -12,3 +12,8 @@ omit =
     seed.py
     tests.py
     static/all_maki_icons/*
+source = .
+[report]
+exclude_lines =
+    if __name__ == "__main__":
+    def __repr__
