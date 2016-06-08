@@ -6,11 +6,11 @@ Bark Park is a web app that gives users an easy way to find dog friendly parks i
 
 Designed to be user friendly, once a marker is selected a sidebar displays further park information; including a link to a park’s website, comments about the park from other users, and park photos.
 
-![Bark Park park info](https://raw.githubusercontent.com/glasses4days/HB-Project/master/static/img/ss_3.png)
+![Bark Park park info](https://raw.githubusercontent.com/glasses4days/HB-Project/master/static/img/ss_3a.png)
 
 Once a park is selected, users can also add their own comments and photos for any park that they’ve experienced with their pooch.
 
-![Bark Park add comment or photo](https://raw.githubusercontent.com/glasses4days/HB-Project/master/static/img/ss_4.png)
+![Bark Park add comment or photo](https://raw.githubusercontent.com/glasses4days/HB-Project/master/static/img/ss_4a.png)
 
 ## <a name="technologiesused"></a>Technologies Used
 
